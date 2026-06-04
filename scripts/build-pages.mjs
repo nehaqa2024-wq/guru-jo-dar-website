@@ -34,9 +34,11 @@ const pages = [
 
 const modals = {
     gallery: `
-    <div class="lightbox" id="lightbox">
-        <button class="lightbox-close" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></button>
-        <img id="lightbox-img" src="" alt="Lightbox View">
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+        <button type="button" class="lightbox-close" aria-label="Close image"><i class="fa-solid fa-xmark"></i></button>
+        <div class="lightbox-stage">
+            <img id="lightbox-img" src="" alt="">
+        </div>
     </div>`,
     seva: `
     <div class="modal" id="seva-modal">

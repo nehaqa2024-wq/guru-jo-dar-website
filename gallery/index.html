@@ -27,22 +27,22 @@
                 </div>
 
                 <div class="gallery-grid">
-                    <div class="gallery-item" onclick="openLightbox('../assets/darbar_interior.png')">
+                    <div class="gallery-item" role="button" tabindex="0" data-full="../assets/darbar_interior.png">
                         <img src="../assets/darbar_interior.png" alt="">
                     </div>
-                    <div class="gallery-item" onclick="openLightbox('../assets/darshan_meditation.png')">
+                    <div class="gallery-item" role="button" tabindex="0" data-full="../assets/darshan_meditation.png">
                         <img src="../assets/darshan_meditation.png" alt="">
                     </div>
-                    <div class="gallery-item" onclick="openLightbox('../assets/spiritual_guidance.png')">
+                    <div class="gallery-item" role="button" tabindex="0" data-full="../assets/spiritual_guidance.png">
                         <img src="../assets/spiritual_guidance.png" alt="">
                     </div>
-                    <div class="gallery-item" onclick="openLightbox('../assets/baba_mulram_meditation.png')">
+                    <div class="gallery-item" role="button" tabindex="0" data-full="../assets/baba_mulram_meditation.png">
                         <img src="../assets/baba_mulram_meditation.png" alt="">
                     </div>
-                    <div class="gallery-item" onclick="openLightbox('../assets/blessing_moment.png')">
+                    <div class="gallery-item" role="button" tabindex="0" data-full="../assets/blessing_moment.png">
                         <img src="../assets/blessing_moment.png" alt="">
                     </div>
-                    <div class="gallery-item" onclick="openLightbox('../assets/elders_portrait.png')">
+                    <div class="gallery-item" role="button" tabindex="0" data-full="../assets/elders_portrait.png">
                         <img src="../assets/elders_portrait.png" alt="">
                     </div>
                 </div>
@@ -50,9 +50,11 @@
         </section>
     </main>
 
-    <div class="lightbox" id="lightbox">
-        <button class="lightbox-close" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></button>
-        <img id="lightbox-img" src="" alt="">
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+        <button type="button" class="lightbox-close" aria-label="Close image"><i class="fa-solid fa-xmark"></i></button>
+        <div class="lightbox-stage">
+            <img id="lightbox-img" src="" alt="">
+        </div>
     </div>
     <div id="toast-container" class="toast-container"></div>
     <div id="site-footer"></div>

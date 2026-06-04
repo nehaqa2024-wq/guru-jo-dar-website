@@ -139,6 +139,8 @@ document.addEventListener("DOMContentLoaded", () => {
         startQuoteTicker();
     }
 
+    initGalleryLightbox();
+
     // 9. Close language dropdown when clicking outside
     document.addEventListener("click", () => {
         const dropdown = document.getElementById("language-dropdown");
@@ -474,6 +476,38 @@ function drawWaveform() {
 /* ==========================================
    LIGHTBOX GALLERY
    ========================================== */
+function initGalleryLightbox() {
+    const lightbox = document.getElementById("lightbox");
+    if (!lightbox) return;
+
+    document.querySelectorAll(".gallery-item").forEach((item) => {
+        const openFromItem = (event) => {
+            if (event.type === "keydown" && event.key !== "Enter" && event.key !== " ") return;
+            event.preventDefault();
+
+            const img = item.querySelector("img");
+            const src = item.getAttribute("data-full") || (img && (img.currentSrc || img.src));
+            if (src) openLightbox(src);
+        };
+
+        item.addEventListener("click", openFromItem);
+        item.addEventListener("keydown", openFromItem);
+    });
+
+    lightbox.querySelector(".lightbox-close")?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        closeLightbox();
+    });
+
+    lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && lightbox.classList.contains("is-open")) closeLightbox();
+    });
+}
+
 function openLightbox(src) {
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = document.getElementById("lightbox-img");
@@ -483,11 +517,18 @@ function openLightbox(src) {
 
     lightboxImg.src = src;
     lightboxImg.alt = "";
-    lightbox.style.display = "flex";
+    lightbox.classList.add("is-open");
+    lightbox.setAttribute("aria-hidden", "false");
+    document.body.classList.add("lightbox-open");
 }
 
 function closeLightbox() {
-    document.getElementById("lightbox").style.display = "none";
+    const lightbox = document.getElementById("lightbox");
+    if (!lightbox) return;
+
+    lightbox.classList.remove("is-open");
+    lightbox.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("lightbox-open");
 }
 
 /* ==========================================
