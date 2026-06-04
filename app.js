@@ -474,20 +474,15 @@ function drawWaveform() {
 /* ==========================================
    LIGHTBOX GALLERY
    ========================================== */
-function openLightbox(src, caption) {
+function openLightbox(src) {
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = document.getElementById("lightbox-img");
-    const lightboxCaption = document.getElementById("lightbox-caption");
+    if (!lightbox || !lightboxImg) return;
+
+    document.getElementById("lightbox-caption")?.remove();
 
     lightboxImg.src = src;
-    if (lightboxCaption) {
-        if (caption) {
-            lightboxCaption.innerText = caption;
-            lightboxCaption.style.display = "";
-        } else {
-            lightboxCaption.style.display = "none";
-        }
-    }
+    lightboxImg.alt = "";
     lightbox.style.display = "flex";
 }
 
