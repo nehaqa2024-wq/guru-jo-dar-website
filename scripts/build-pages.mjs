@@ -37,7 +37,6 @@ const modals = {
     <div class="lightbox" id="lightbox">
         <button class="lightbox-close" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></button>
         <img id="lightbox-img" src="" alt="Lightbox View">
-        <p id="lightbox-caption">Caption</p>
     </div>`,
     seva: `
     <div class="modal" id="seva-modal">

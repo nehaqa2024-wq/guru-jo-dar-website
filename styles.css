@@ -531,6 +531,15 @@ a {
     animation: fadeInUp 0.8s ease 0.1s both;
 }
 
+.hero-asthans {
+    font-size: 1.05rem;
+    color: var(--primary-gold);
+    max-width: 640px;
+    margin: 1rem auto 0;
+    line-height: 1.7;
+    font-weight: 500;
+}
+
 .hero-subtitle {
     font-size: 1.25rem;
     color: var(--text-muted);

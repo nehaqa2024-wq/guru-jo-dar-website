@@ -478,9 +478,16 @@ function openLightbox(src, caption) {
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = document.getElementById("lightbox-img");
     const lightboxCaption = document.getElementById("lightbox-caption");
-    
+
     lightboxImg.src = src;
-    lightboxCaption.innerText = caption;
+    if (lightboxCaption) {
+        if (caption) {
+            lightboxCaption.innerText = caption;
+            lightboxCaption.style.display = "";
+        } else {
+            lightboxCaption.style.display = "none";
+        }
+    }
     lightbox.style.display = "flex";
 }
 
