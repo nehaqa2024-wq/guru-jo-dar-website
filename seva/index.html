@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seva - Guru Jo Dar</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body data-page="seva" class="inner-page">
+    <audio id="ambient-audio" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"></audio>
+    <div id="site-header"></div>
+    <div id="site-drawer"></div>
+    <main class="page-main">
+<section id="seva" class="section-padding">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 data-en="Seva & Humanitarian Activities" data-hi="सेवा और मानवीय गतिविधियाँ" data-sd="सेवा ऐं भलाई जा कम">Seva & Humanitarian Activities</h2>
+                    <div class="divider"></div>
+                    <p class="section-subtitle" data-en="Carry forward the message of Baba Mulram Saheb through selfless service initiatives." data-hi="निष्काम सेवा पहलों के माध्यम से बाबा मूलराम साहिब के संदेश को आगे बढ़ाएं।" data-sd="बाबा मूलराम साहिब जे संदेश खे सेवा जे कमन ज़रिए अगते वधायो।">Carry forward the message of Baba Mulram Saheb through selfless service initiatives.</p>
+                </div>
+
+                <div class="seva-grid">
+                    <!-- Langar Card -->
+                    <div class="seva-card">
+                        <div class="seva-img-box seva-img-box--placeholder">
+                            <div class="seva-img-placeholder" aria-hidden="true"><i class="fa-solid fa-bowl-food"></i></div>
+                            <div class="seva-badge" data-en="Daily" data-hi="प्रतिदिन" data-sd="रोज़ानो">Daily</div>
+                        </div>
+                        <div class="seva-body">
+                            <h3 data-en="Langar Seva (Community Kitchen)" data-hi="लंगर सेवा (सामुदायिक रसोई)" data-sd="लंगर सेवा">Langar Seva (Community Kitchen)</h3>
+                            <p data-en="Serving hot, fresh, and nutritious vegetarian meals to hundreds of devotees and under-privileged people every single day." data-hi="सैकड़ों भक्तों और वंचित लोगों को प्रतिदिन गर्म, ताजा और पौष्टिक शाकाहारी भोजन परोसना।" data-sd="रोज़ सैकड़ों गरीब ऐं ज़रूरतमंद माढ़ुन खे गरम ऐं ताज़ो भोजन मुफ़्त खाराएण।">Serving hot, fresh, and nutritious vegetarian meals to hundreds of devotees and under-privileged people every single day.</p>
+                            <button class="btn btn-secondary-outline btn-sm" onclick="openSevaModal('Langar Seva')" data-en="Pledge Langar" data-hi="लंगर सेवा का संकल्प लें" data-sd="लंगर संकल्प">Pledge Langar</button>
+                        </div>
+                    </div>
+
+                    <!-- Cow Shelter Card -->
+                    <div class="seva-card">
+                        <div class="seva-img-box seva-img-box--placeholder">
+                            <div class="seva-img-placeholder" aria-hidden="true"><i class="fa-solid fa-cow"></i></div>
+                            <div class="seva-badge" data-en="Care" data-hi="देखभाल" data-sd="संभाल">Care</div>
+                        </div>
+                        <div class="seva-body">
+                            <h3 data-en="Gaushala (Cow Shelter)" data-hi="गौशाला सेवा" data-sd="गौशाला सेवा">Gaushala (Cow Shelter)</h3>
+                            <p data-en="Providing food, medical care, and shelter to abandoned cows, embodying Baba Mulram Saheb's teaching of compassion for animals." data-hi="आवारा गायों को भोजन, चिकित्सा देखभाल और आश्रय प्रदान करना, जो पशुओं के प्रति दया के उपदेश को दर्शाता है।" data-sd="गौशाला में गाउन जी सेवा, संभाल ऐं इलाज करण।">Providing food, medical care, and shelter to abandoned cows, embodying Baba Mulram Saheb's teaching of compassion for animals.</p>
+                            <button class="btn btn-secondary-outline btn-sm" onclick="openSevaModal('Gaushala Seva')" data-en="Pledge Cow Grass" data-hi="गौ-ग्रास का संकल्प लें" data-sd="गौ संकल्प">Pledge Cow Grass</button>
+                        </div>
+                    </div>
+
+                    <!-- Medical Help Card -->
+                    <div class="seva-card">
+                        <div class="seva-img-box seva-img-box--placeholder">
+                            <div class="seva-img-placeholder" aria-hidden="true"><i class="fa-solid fa-heart-pulse"></i></div>
+                            <div class="seva-badge" data-en="Health" data-hi="स्वास्थ्य" data-sd="सेहत">Health</div>
+                        </div>
+                        <div class="seva-body">
+                            <h3 data-en="Free Medical Support" data-hi="निःशुल्क चिकित्सा सहायता" data-sd="मुफ़्त डाक्टरी कैंप">Free Medical Support</h3>
+                            <p data-en="Organizing periodic health checkups, dental clinics, and distributing free medicines to rural communities around the ashram." data-hi="समय-समय पर स्वास्थ्य जांच, दंत चिकित्सा शिविर आयोजित करना और मुफ़्त दवाएं वितरित करना।" data-sd="मुफ़्त सेहत जांच, इलाज ऐं दवाइयों जो मुफ़्त बंदोबस्त करण।">Organizing periodic health checkups, dental clinics, and distributing free medicines to rural communities around the ashram.</p>
+                            <button class="btn btn-secondary-outline btn-sm" onclick="openSevaModal('Medical Help')" data-en="Pledge Medicines" data-hi="दवाओं का संकल्प लें" data-sd="दवा संकल्प">Pledge Medicines</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="modal" id="seva-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeSevaModal()"><i class="fa-solid fa-xmark"></i></button>
+            <h3 id="seva-modal-title">Pledge Seva</h3>
+            <p data-en="Generate a digital receipt to commit your support for this service. You will receive coordination details via email." data-hi="इस सेवा के समर्थन का संकल्प लेने के लिए एक डिजिटल रसीद बनाएं। आपको विवरण ईमेल पर प्राप्त होगा।" data-sd="पंहिंजी सेवा जो संकल्प रसीद बनायो। वधिक जानकारी ईमेल ते मिळन्दी।">Generate a digital receipt to commit your support for this service. You will receive coordination details via email.</p>
+            <form id="seva-pledge-form" onsubmit="generatePledgeReceipt(event)">
+                <input type="hidden" id="pledge-type">
+                <div class="form-group">
+                    <label for="pledge-name" data-en="Your Name" data-hi="आपका नाम" data-sd="नालो">Your Name *</label>
+                    <input type="text" id="pledge-name" required placeholder="Enter name">
+                </div>
+                <div class="form-group">
+                    <label for="pledge-email" data-en="Email Address" data-hi="ईमेल" data-sd="ईमेल">Email Address *</label>
+                    <input type="email" id="pledge-email" required placeholder="yourname@domain.com">
+                </div>
+                <div class="form-group">
+                    <label for="pledge-amount" data-en="Number of Days / Committment" data-hi="दिनों की संख्या / संकल्प" data-sd="दींहुन जो तादाद">Number of Days / Commitment (e.g. 5 days, 1 month)</label>
+                    <input type="text" id="pledge-amount" required placeholder="e.g. 3 Days Langar, 1 Month medicines">
+                </div>
+                <button type="submit" class="btn btn-primary btn-wide" data-en="Generate Pledge Receipt" data-hi="संकल्प रसीद बनाएं" data-sd="रसीद बनायो">Generate Pledge Receipt</button>
+            </form>
+            <div class="receipt-result hidden" id="receipt-result">
+                <div class="receipt-header">
+                    <h4>Guru Jo Dar Seva</h4>
+                    <p>Pledge Receipt</p>
+                </div>
+                <div class="receipt-body">
+                    <p><strong>Pledger:</strong> <span id="r-name">Name</span></p>
+                    <p><strong>Email:</strong> <span id="r-email">Email</span></p>
+                    <p><strong>Seva Type:</strong> <span id="r-type">Type</span></p>
+                    <p><strong>Pledge Details:</strong> <span id="r-details">Details</span></p>
+                    <p><strong>Receipt ID:</strong> <span id="r-id" class="gold-text">GJD-2026-X</span></p>
+                    <p class="receipt-footer">"May Baba Mulram Saheb shower his blessings."</p>
+                </div>
+                <button class="btn btn-secondary btn-sm btn-wide" onclick="closeSevaModal()" data-en="Download & Close" data-hi="डाउनलोड करें और बंद करें" data-sd="डाउनलोड ऐं बंद">Download & Close</button>
+            </div>
+        </div>
+    </div>
+    <div id="toast-container" class="toast-container"></div>
+    <div id="site-footer"></div>
+    <script src="../site-layout.js" data-base="../"></script>
+    <script src="../app.js"></script>
+</body>
+</html>

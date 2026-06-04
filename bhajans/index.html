@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhajans - Guru Jo Dar</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body data-page="bhajans" class="inner-page">
+    <audio id="ambient-audio" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"></audio>
+    <div id="site-header"></div>
+    <div id="site-drawer"></div>
+    <main class="page-main">
+<section id="bhajans" class="music-section section-padding">
+            <div class="container">
+                <div class="section-header text-center light-theme-header">
+                    <h2 data-en="Bhajan Darbar" data-hi="भजन दरबार" data-sd="भजन दरबार">Bhajan Darbar</h2>
+                    <div class="divider"></div>
+                    <p class="section-subtitle" data-en="Listen to the soul-stirring devotional bhajans dedicated to Pujya Baba Mulram Saheb." data-hi="पूज्य बाबा मूलराम साहिब को समर्पित आत्मा को झकझोर देने वाले भक्ति भजन सुनें।" data-sd="बाबा मूलराम साहिब जी महिमा में सुरीला ऐं मधुर भजन बुधो।">Listen to the soul-stirring devotional bhajans dedicated to Pujya Baba Mulram Saheb.</p>
+                </div>
+
+                <div class="audio-player-container">
+                    <div class="player-left">
+                        <!-- Disk Animation -->
+                        <div class="disk-wrapper">
+                            <div class="music-disk" id="music-disk">
+                                <div class="disk-center"></div>
+                            </div>
+                            <div class="playing-glow"></div>
+                        </div>
+                        <div class="now-playing-info text-center">
+                            <h3 id="player-track-title">Guru Var Dayal</h3>
+                            <p id="player-track-artist">Devotional Chants</p>
+                        </div>
+                    </div>
+
+                    <div class="player-right">
+                        <!-- Waveform Visualizer -->
+                        <div class="waveform-container">
+                            <canvas id="waveform-canvas"></canvas>
+                        </div>
+
+                        <!-- Progress Bar -->
+                        <div class="progress-bar-container">
+                            <span id="current-time">0:00</span>
+                            <div class="progress-bg" id="progress-bg">
+                                <div class="progress-fill" id="progress-fill"></div>
+                                <div class="progress-knob" id="progress-knob"></div>
+                            </div>
+                            <span id="total-duration">3:45</span>
+                        </div>
+
+                        <!-- Controls -->
+                        <div class="player-controls">
+                            <button id="prev-btn" class="btn-control"><i class="fa-solid fa-backward-step"></i></button>
+                            <button id="play-btn" class="btn-control btn-play"><i class="fa-solid fa-play"></i></button>
+                            <button id="next-btn" class="btn-control"><i class="fa-solid fa-forward-step"></i></button>
+                            <button id="mute-btn" class="btn-control"><i class="fa-solid fa-volume-high"></i></button>
+                            <div class="volume-slider-container">
+                                <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.8">
+                            </div>
+                        </div>
+
+                        <!-- Playlist Grid -->
+                        <div class="playlist-header">
+                            <h4 data-en="Tracks Playlist" data-hi="ट्रैक प्लेलिस्ट" data-sd="भजन प्लेलिस्ट">Tracks Playlist</h4>
+                        </div>
+                        <ul class="playlist" id="playlist">
+                            <!-- Injected by JS -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="toast-container" class="toast-container"></div>
+    <div id="site-footer"></div>
+    <script src="../site-layout.js" data-base="../"></script>
+    <script src="../app.js"></script>
+</body>
+</html>

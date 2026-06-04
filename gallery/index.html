@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Guru Jo Dar</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body data-page="gallery" class="inner-page">
+    <audio id="ambient-audio" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"></audio>
+    <div id="site-header"></div>
+    <div id="site-drawer"></div>
+    <main class="page-main">
+<section id="gallery" class="gallery-section section-padding">
+            <div class="container">
+                <div class="section-header text-center light-theme-header">
+                    <h2 data-en="Darshan Gallery" data-hi="दर्शन गैलरी" data-sd="दर्शन गैलरी">Darshan Gallery</h2>
+                    <div class="divider"></div>
+                    <p class="section-subtitle" data-en="Glance through the spiritual aura, satsangs, and visual history of Guru Jo Dar." data-hi="गुरु जो दर के आध्यात्मिक वातावरण, सत्संगों और दृश्यों पर एक नजर डालें।" data-sd="गुरु जो दर जा रूहानी नज़ारा, सत्संग ऐं इतिहास जी झलक।">Glance through the spiritual aura, satsangs, and visual history of Guru Jo Dar.</p>
+                </div>
+
+                <div class="gallery-grid">
+                    <div class="gallery-item" onclick="openLightbox('../assets/darbar_interior.png', 'Sacred Darbar Interior')">
+                        <img src="../assets/darbar_interior.png" alt="Sacred darbar interior with portraits and garlands">
+                        <div class="gallery-overlay">
+                            <span><i class="fa-solid fa-magnifying-glass-plus"></i> View Darbar</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox('../assets/darshan_meditation.png', 'Meditation Darshan')">
+                        <img src="../assets/darshan_meditation.png" alt="Elder in meditation before portrait of Baba Mulram">
+                        <div class="gallery-overlay">
+                            <span><i class="fa-solid fa-magnifying-glass-plus"></i> View Darshan</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox('../assets/spiritual_guidance.png', 'Spiritual Guidance')">
+                        <img src="../assets/spiritual_guidance.png" alt="Spiritual guidance and presence">
+                        <div class="gallery-overlay">
+                            <span><i class="fa-solid fa-magnifying-glass-plus"></i> View Darshan</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox('../assets/baba_mulram_meditation.png', 'Baba Mulram Saheb in Meditation')">
+                        <img src="../assets/baba_mulram_meditation.png" alt="Baba Mulram Saheb seated in meditation">
+                        <div class="gallery-overlay">
+                            <span><i class="fa-solid fa-magnifying-glass-plus"></i> View Darshan</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox('../assets/blessing_moment.png', 'Blessing Moment')">
+                        <img src="../assets/blessing_moment.png" alt="Devotee receiving blessing">
+                        <div class="gallery-overlay">
+                            <span><i class="fa-solid fa-magnifying-glass-plus"></i> View Blessing</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox('../assets/elders_portrait.png', 'Revered Elders')">
+                        <img src="../assets/elders_portrait.png" alt="Revered elders at Guru Jo Dar">
+                        <div class="gallery-overlay">
+                            <span><i class="fa-solid fa-magnifying-glass-plus"></i> View Portrait</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></button>
+        <img id="lightbox-img" src="" alt="Lightbox View">
+        <p id="lightbox-caption">Caption</p>
+    </div>
+    <div id="toast-container" class="toast-container"></div>
+    <div id="site-footer"></div>
+    <script src="../site-layout.js" data-base="../"></script>
+    <script src="../app.js"></script>
+</body>
+</html>
