@@ -6,11 +6,30 @@ let currentTheme = 'dark';
 let isAmbientPlaying = false;
 
 // Playlist Data
+function bhajanSrc(file) {
+    const base = window.GJD_BASE || "";
+    return `${base}assets/bhajans/${file}`;
+}
+
 const playlist = [
-    { title: "Baba Mulram Mahima", artist: "Devotional Chants", duration: "4:12", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
-    { title: "Satsang Bhajan - Darbar Aaye", artist: "Pujya Shishyas", duration: "5:03", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" },
-    { title: "Sai Tere Charnon Mein", artist: "Devotional Singer", duration: "3:45", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" },
-    { title: "Sindhi Kalaam - Baba Mulram", artist: "Sufi Singers", duration: "4:30", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" }
+    {
+        title: "Mera Aapki Kripa Se - Guru Jo Dar Rajkot",
+        artist: "Sai Bharatlal Ji Masand",
+        duration: "4:34",
+        src: bhajanSrc("mera-aapki-kripa-se.mp3")
+    },
+    {
+        title: "Maha Aarti - Guru Arjandev Masand Saheb",
+        artist: "Sai Bharatlal Ji Masand",
+        duration: "7:26",
+        src: bhajanSrc("maha-aarti-guru-arjandev.mp3")
+    },
+    {
+        title: "Kar Maher Achi Sabh Te",
+        artist: "Sai Bharatlal Ji Masand",
+        duration: "5:37",
+        src: bhajanSrc("kar-maher-achi-sabh-te.mp3")
+    }
 ];
 
 let currentTrackIndex = 0;
