@@ -598,54 +598,6 @@ a {
     animation: fadeInUp 0.8s ease 0.4s both;
 }
 
-.hero-social {
-    margin-top: 28px;
-    animation: fadeInUp 0.8s ease 0.5s both;
-}
-
-.hero-social-label {
-    display: block;
-    font-size: 0.85rem;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 12px;
-}
-
-.hero-social-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
-    justify-content: center;
-}
-
-.hero-social-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 22px;
-    border-radius: var(--border-radius-sm);
-    border: 1px solid var(--border-color);
-    background: var(--bg-panel);
-    color: var(--text-main);
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: var(--transition-fast);
-    touch-action: manipulation;
-}
-
-.hero-social-btn i {
-    font-size: 1.2rem;
-    color: var(--primary-gold);
-}
-
-.hero-social-btn:hover {
-    border-color: var(--primary-gold);
-    color: var(--primary-gold);
-    transform: translateY(-2px);
-    box-shadow: var(--gold-glow);
-}
-
 .hero-wave {
     position: absolute;
     bottom: -1px;
@@ -1964,15 +1916,6 @@ body.lightbox-open {
         gap: 15px;
     }
 
-    .hero-social-links {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .hero-social-btn {
-        justify-content: center;
-    }
-    
     .btn-wide {
         max-width: 100%;
     }

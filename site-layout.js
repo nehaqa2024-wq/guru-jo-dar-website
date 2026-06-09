@@ -90,10 +90,8 @@
                 <h4>Guru Jo Dar</h4>
                 <p data-en="A charitable and spiritual sanctuary spreading Baba Mulram Saheb's vision of love, equality, and compassion." data-hi="एक धर्मार्थ और आध्यात्मिक धाम जो बाबा मूलराम साहिब के प्रेम, समानता और करुणा के संदेश को फैलाता है।" data-sd="हिक भलाई ऐं रूहानी धाम जो बाबा मूलराम साहिब जी प्रेम ऐं दया जो संदेश फैलाए थो।">A charitable and spiritual sanctuary spreading Baba Mulram Saheb's vision of love, equality, and compassion.</p>
                 <div class="social-icons">
-                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
                     <a href="https://www.youtube.com/@gurujodarrajkot3530?si=OrlJ8S8QToX3g7OC" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
                     <a href="https://www.instagram.com/gurujodar?igsh=MWY5ZTNscjFlZ21uNg==" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
                 </div>
             </div>
             <div class="footer-links">
