@@ -11,6 +11,15 @@ function bhajanSrc(file) {
     return `${base}assets/bhajans/${file}`;
 }
 
+const AMBIENT_CHANT_SRC = "kar-maher-achi-sabh-te.mp3";
+
+function initAmbientAudio() {
+    const ambientAudio = document.getElementById("ambient-audio");
+    if (ambientAudio) {
+        ambientAudio.src = bhajanSrc(AMBIENT_CHANT_SRC);
+    }
+}
+
 const playlist = [
     {
         title: "Mera Aapki Kripa Se - Guru Jo Dar Rajkot",
@@ -47,6 +56,8 @@ let wavePhase = 0;
    DOM CONTENT LOADED INITIALIZER
    ========================================== */
 document.addEventListener("DOMContentLoaded", () => {
+    initAmbientAudio();
+
     // Layout chrome (header/footer) may render after this handler on subpages
     const bindChromeControls = () => {
         const header = document.querySelector(".main-header");

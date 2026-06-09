@@ -91,7 +91,7 @@ function pageShell({ slug, section, title, page, extraModals = "" }) {
 <html lang="en">
 ${pageHead}
 <body data-page="${page}" class="inner-page">
-    <audio id="ambient-audio" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"></audio>
+    <audio id="ambient-audio" loop preload="metadata"></audio>
     <div id="site-header"></div>
     <div id="site-drawer"></div>
     <main class="page-main">
@@ -130,7 +130,7 @@ const homeHtml = `<!DOCTYPE html>
 <html lang="en">
 ${homeHead}
 <body data-page="home">
-    <audio id="ambient-audio" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"></audio>
+    <audio id="ambient-audio" loop preload="metadata"></audio>
     <div id="site-header"></div>
     <div id="site-drawer"></div>
     <main>
