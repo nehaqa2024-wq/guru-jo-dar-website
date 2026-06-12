@@ -11,7 +11,7 @@ function bhajanSrc(file) {
     return `${base}assets/bhajans/${file}`;
 }
 
-const AMBIENT_CHANT_SRC = "kar-maher-achi-sabh-te.mp3";
+const AMBIENT_CHANT_SRC = "Background.mp3";
 
 function initAmbientAudio() {
     const ambientAudio = document.getElementById("ambient-audio");
@@ -38,6 +38,24 @@ const playlist = [
         artist: "Sai Bharatlal Ji Masand",
         duration: "5:37",
         src: bhajanSrc("kar-maher-achi-sabh-te.mp3")
+    },
+    {
+        title: "Aarti of Saijan - Sai Rameshlal Ji Masand",
+        artist: "Guru Jo Dar Rajkot",
+        duration: "6:47",
+        src: bhajanSrc("aarti-of-saijan-sai-rameshlal-ji.mp3")
+    },
+    {
+        title: "Wah Guru Guru Jo Dar",
+        artist: "Sai Bharatlal Ji Masand",
+        duration: "4:01",
+        src: bhajanSrc("wah-guru-guru-jo-dar.mp3")
+    },
+    {
+        title: "Palav Saheb (Lord Jhulelal)",
+        artist: "Sai Bharatlal Ji Masand",
+        duration: "5:25",
+        src: bhajanSrc("palav-saheb-lord-jhulelal.mp3")
     }
 ];
 
@@ -55,7 +73,7 @@ let wavePhase = 0;
 /* ==========================================
    DOM CONTENT LOADED INITIALIZER
    ========================================== */
-document.addEventListener("DOMContentLoaded", () => {
+function initApp() {
     initAmbientAudio();
 
     // Layout chrome (header/footer) may render after this handler on subpages
@@ -88,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
             themeToggle.addEventListener("click", () => {
         if (currentTheme === 'dark') {
             document.documentElement.setAttribute('data-theme', 'light');
-            themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
+            themeToggle.innerHTML = '<i class="fa-solid fa-lightbulb"></i>';
             currentTheme = 'light';
             showToast("Switched to Light Theme");
         } else {
@@ -178,7 +196,13 @@ document.addEventListener("DOMContentLoaded", () => {
             dropdown.classList.remove("active");
         }
     });
-});
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initApp);
+} else {
+    initApp();
+}
 
 /* ==========================================
    TRANSLATION / LOCALIZATION
@@ -652,3 +676,23 @@ function showToast(message) {
         });
     }, 3500);
 }
+
+// Explicit Window Bindings for Global/Inline Event Handlers
+window.toggleLangDropdown = toggleLangDropdown;
+window.changeLanguage = changeLanguage;
+window.toggleMobileMenu = toggleMobileMenu;
+window.switchTab = switchTab;
+window.switchMiracleTab = switchMiracleTab;
+window.selectTrack = selectTrack;
+window.closeSuccessCard = closeSuccessCard;
+window.closeSevaModal = closeSevaModal;
+window.openSevaModal = openSevaModal;
+window.generatePledgeReceipt = generatePledgeReceipt;
+window.handleArdaasSubmit = handleArdaasSubmit;
+window.togglePlayBhajan = togglePlayBhajan;
+window.prevTrack = prevTrack;
+window.nextTrack = nextTrack;
+window.toggleMute = toggleMute;
+window.seekAudio = seekAudio;
+window.showToast = showToast;
+

@@ -4,14 +4,14 @@
     const base = script ? script.getAttribute("data-base") || "" : "";
 
     const NAV = [
-        { id: "home", path: base || "./", label: { en: "Home", hi: "गृह", sd: "घर" } },
-        { id: "history", path: base + "history/", label: { en: "Legacy", hi: "इतिहास", sd: "विरसो" } },
-        { id: "miracles", path: base + "miracles/", label: { en: "Miracles", hi: "लीला", sd: "लीलाओं" } },
-        { id: "bhajans", path: base + "bhajans/", label: { en: "Bhajans", hi: "भजन", sd: "भजन" } },
-        { id: "seva", path: base + "seva/", label: { en: "Seva", hi: "सेवा", sd: "सेवा" } },
-        { id: "gallery", path: base + "gallery/", label: { en: "Gallery", hi: "गैलरी", sd: "गैलरी" } },
-        { id: "ardaas", path: base + "ardaas/", label: { en: "Ardaas", hi: "अरदास", sd: "अरदास" } },
-        { id: "contact", path: base + "contact/", label: { en: "Contact", hi: "संपर्क", sd: "संपर्क" } }
+        { id: "home", path: base ? base + "index.html" : "index.html", label: { en: "Home", hi: "गृह", sd: "घर" } },
+        { id: "history", path: base + "history/index.html", label: { en: "Legacy", hi: "इतिहास", sd: "विरसो" } },
+        { id: "miracles", path: base + "miracles/index.html", label: { en: "Miracles", hi: "लीला", sd: "लीलाओं" } },
+        { id: "bhajans", path: base + "bhajans/index.html", label: { en: "Bhajans", hi: "भजन", sd: "भजन" } },
+        { id: "seva", path: base + "seva/index.html", label: { en: "Seva", hi: "सेवा", sd: "सेवा" } },
+        { id: "gallery", path: base + "gallery/index.html", label: { en: "Gallery", hi: "गैलरी", sd: "गैलरी" } },
+        { id: "ardaas", path: base + "ardaas/index.html", label: { en: "Ardaas", hi: "अरदास", sd: "अरदास" } },
+        { id: "contact", path: base + "contact/index.html", label: { en: "Contact", hi: "संपर्क", sd: "संपर्क" } }
     ];
 
     function navItem(item, activePage, linkClass) {
@@ -37,7 +37,7 @@
         const headerHTML = `
     <header class="main-header">
         <div class="container header-container">
-            <a href="${base || "./"}" class="logo">
+            <a href="${base ? base + 'index.html' : 'index.html'}" class="logo">
                 <span class="gold-text">Guru Jo Dar</span>
                 <span class="logo-subtitle">Baba Mulram Saheb</span>
             </a>
@@ -97,11 +97,11 @@
             <div class="footer-links">
                 <h4 data-en="Quick Links" data-hi="त्वरित संपर्क" data-sd="लिंक्स">Quick Links</h4>
                 <ul>
-                    <li><a href="${base || "./"}">Home</a></li>
-                    <li><a href="${base}history/">Legacy</a></li>
-                    <li><a href="${base}bhajans/">Bhajans</a></li>
-                    <li><a href="${base}seva/">Seva</a></li>
-                    <li><a href="${base}ardaas/">Ardaas Request</a></li>
+                    <li><a href="${base ? base + 'index.html' : 'index.html'}">Home</a></li>
+                    <li><a href="${base}history/index.html">Legacy</a></li>
+                    <li><a href="${base}bhajans/index.html">Bhajans</a></li>
+                    <li><a href="${base}seva/index.html">Seva</a></li>
+                    <li><a href="${base}ardaas/index.html">Ardaas Request</a></li>
                 </ul>
             </div>
             <div class="footer-timings">
@@ -128,9 +128,16 @@
         }
     };
 
-    document.addEventListener("DOMContentLoaded", () => {
+    function init() {
         const page = document.body.getAttribute("data-page") || "home";
         renderSiteLayout(page);
         document.dispatchEvent(new CustomEvent("gjd-layout-ready"));
-    });
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", init);
+    } else {
+        init();
+    }
 })();
+
