@@ -1,9 +1,16 @@
 /* ==========================================
    APP STATE & INITIALIZATION
    ========================================== */
-let currentLanguage = localStorage.getItem("gjd_lang") || 'en';
-let currentTheme = localStorage.getItem("gjd_theme") || 'dark';
+let currentLanguage = 'en';
+let currentTheme = 'dark';
 let isAmbientPlaying = false;
+
+try {
+    currentLanguage = localStorage.getItem("gjd_lang") || 'en';
+    currentTheme = localStorage.getItem("gjd_theme") || 'dark';
+} catch (e) {
+    console.warn("localStorage is blocked or not supported:", e);
+}
 
 // Apply saved theme immediately to prevent flashing
 if (currentTheme === "light") {
@@ -118,13 +125,21 @@ function initApp() {
                         document.documentElement.setAttribute('data-theme', 'light');
                         themeToggle.innerHTML = '<i class="fa-solid fa-lightbulb"></i>';
                         currentTheme = 'light';
-                        localStorage.setItem("gjd_theme", "light");
+                        try {
+                            localStorage.setItem("gjd_theme", "light");
+                        } catch (e) {
+                            console.warn("Could not save theme to localStorage:", e);
+                        }
                         showToast("Switched to Light Theme");
                     } else {
                         document.documentElement.removeAttribute('data-theme');
                         themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
                         currentTheme = 'dark';
-                        localStorage.setItem("gjd_theme", "dark");
+                        try {
+                            localStorage.setItem("gjd_theme", "dark");
+                        } catch (e) {
+                            console.warn("Could not save theme to localStorage:", e);
+                        }
                         showToast("Switched to Dark Theme");
                     }
                 });
@@ -248,8 +263,11 @@ function changeLanguage(langCode, event, showNotification = true) {
         dropdown.classList.remove("active");
     }
 
-    currentLanguage = langCode;
-    localStorage.setItem("gjd_lang", langCode);
+    try {
+        localStorage.setItem("gjd_lang", langCode);
+    } catch (e) {
+        console.warn("Could not save language to localStorage:", e);
+    }
     const items = document.querySelectorAll("[data-en]");
     
     items.forEach(el => {
