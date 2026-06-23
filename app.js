@@ -1,9 +1,16 @@
 /* ==========================================
    APP STATE & INITIALIZATION
    ========================================== */
-let currentLanguage = 'en';
-let currentTheme = 'dark';
+let currentLanguage = localStorage.getItem("gjd_lang") || 'en';
+let currentTheme = localStorage.getItem("gjd_theme") || 'dark';
 let isAmbientPlaying = false;
+
+// Apply saved theme immediately to prevent flashing
+if (currentTheme === "light") {
+    document.documentElement.setAttribute('data-theme', 'light');
+} else {
+    document.documentElement.removeAttribute('data-theme');
+}
 
 // Playlist Data
 function bhajanSrc(file) {
@@ -101,21 +108,27 @@ function initApp() {
         }
 
         const themeToggle = document.getElementById("theme-toggle");
-        if (themeToggle && !themeToggle.dataset.bound) {
-            themeToggle.dataset.bound = "true";
-            themeToggle.addEventListener("click", () => {
-        if (currentTheme === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'light');
-            themeToggle.innerHTML = '<i class="fa-solid fa-lightbulb"></i>';
-            currentTheme = 'light';
-            showToast("Switched to Light Theme");
-        } else {
-            document.documentElement.removeAttribute('data-theme');
-            themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
-            currentTheme = 'dark';
-            showToast("Switched to Dark Theme");
-        }
-            });
+        if (themeToggle) {
+            // Set initial icon to match currentTheme
+            themeToggle.innerHTML = currentTheme === 'dark' ? '<i class="fa-solid fa-moon"></i>' : '<i class="fa-solid fa-lightbulb"></i>';
+            if (!themeToggle.dataset.bound) {
+                themeToggle.dataset.bound = "true";
+                themeToggle.addEventListener("click", () => {
+                    if (currentTheme === 'dark') {
+                        document.documentElement.setAttribute('data-theme', 'light');
+                        themeToggle.innerHTML = '<i class="fa-solid fa-lightbulb"></i>';
+                        currentTheme = 'light';
+                        localStorage.setItem("gjd_theme", "light");
+                        showToast("Switched to Light Theme");
+                    } else {
+                        document.documentElement.removeAttribute('data-theme');
+                        themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
+                        currentTheme = 'dark';
+                        localStorage.setItem("gjd_theme", "dark");
+                        showToast("Switched to Dark Theme");
+                    }
+                });
+            }
         }
 
         const ambientToggle = document.getElementById("ambient-toggle");
@@ -196,6 +209,11 @@ function initApp() {
             dropdown.classList.remove("active");
         }
     });
+
+    // Apply saved language on load (without showing a toast)
+    if (currentLanguage && ['en', 'hi', 'sd'].includes(currentLanguage)) {
+        changeLanguage(currentLanguage, null, false);
+    }
 }
 
 if (document.readyState === "loading") {
@@ -218,7 +236,7 @@ function toggleLangDropdown(event) {
     }
 }
 
-function changeLanguage(langCode, event) {
+function changeLanguage(langCode, event, showNotification = true) {
     if (event) {
         event.preventDefault();
         event.stopPropagation();
@@ -231,6 +249,7 @@ function changeLanguage(langCode, event) {
     }
 
     currentLanguage = langCode;
+    localStorage.setItem("gjd_lang", langCode);
     const items = document.querySelectorAll("[data-en]");
     
     items.forEach(el => {
@@ -256,12 +275,17 @@ function changeLanguage(langCode, event) {
     });
 
     // Update current lang text in menu
-    document.getElementById("current-lang").innerText = langCode.toUpperCase();
+    const currentLangEl = document.getElementById("current-lang");
+    if (currentLangEl) {
+        currentLangEl.innerText = langCode.toUpperCase();
+    }
     
-    let welcomeMsg = "Language changed successfully.";
-    if (langCode === 'hi') welcomeMsg = "भाषा सफलतापूर्वक बदल दी गई है।";
-    if (langCode === 'sd') welcomeMsg = "ٻولي ڪاميابيءَ سان تبديل ٿي وئي آهي.";
-    showToast(welcomeMsg);
+    if (showNotification) {
+        let welcomeMsg = "Language changed successfully.";
+        if (langCode === 'hi') welcomeMsg = "भाषा सफलतापूर्वक बदल दी गई है।";
+        if (langCode === 'sd') welcomeMsg = "ٻولي ڪاميابيءَ سان تبديل ٿي وئي آهي.";
+        showToast(welcomeMsg);
+    }
 }
 
 function toggleMobileMenu() {
