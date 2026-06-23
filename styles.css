@@ -1967,16 +1967,6 @@ body.lightbox-open {
         justify-content: center;
         font-size: 0.9rem;
     }
-}
-
-@media (max-width: 360px) {
-    .logo .gold-text {
-        font-size: 0.92rem;
-    }
-    .header-actions {
-        gap: 4px;
-    }
-}
 
     .hero-title {
         font-size: 2.6rem;
@@ -2007,5 +1997,14 @@ body.lightbox-open {
         right: 15px;
         left: 15px;
         top: 80px;
+    }
+}
+
+@media (max-width: 360px) {
+    .logo .gold-text {
+        font-size: 0.92rem;
+    }
+    .header-actions {
+        gap: 4px;
     }
 }
