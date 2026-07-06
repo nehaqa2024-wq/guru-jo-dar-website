@@ -96,6 +96,12 @@ const playlist = [
         src: bhajanSrc("mere-satguru-ji-tussi-mehar-karo.mp3")
     },
     {
+        title: "Hath Guraan Da Guruji - Bade Mandir",
+        artist: "Siddharth Mohan",
+        duration: "4:28",
+        src: bhajanSrc("hath-guraan-da-guruji.mp3")
+    },
+    {
         title: "Tereya Charana Ch Meri Ardaas Daata Guruji",
         artist: "Siddharth Mohan",
         duration: "6:15",
