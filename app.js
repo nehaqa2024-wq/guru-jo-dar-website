@@ -78,7 +78,7 @@ const playlist = [
         src: bhajanSrc("palav-saheb-lord-jhulelal.mp3")
     },
     {
-        title: "Tu Mere Saath Hai Guruji - Bade Mandir",
+        title: "Tu Mere Saath Hai Guruji",
         artist: "Siddharth Mohan",
         duration: "3:49",
         src: bhajanSrc("tu-mere-saath-hai-guruji.mp3")
