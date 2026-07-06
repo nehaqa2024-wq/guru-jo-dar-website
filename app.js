@@ -36,6 +36,12 @@ function initAmbientAudio() {
 
 const playlist = [
     {
+        title: "Shukrana Tera - Blessings Always",
+        artist: "Siddharth Mohan",
+        duration: "3:24",
+        src: bhajanSrc("shukrana-tera.mp3")
+    },
+    {
         title: "Mera Aapki Kripa Se - Guru Jo Dar Rajkot",
         artist: "Sai Bharatlal Ji Masand",
         duration: "4:34",
@@ -70,6 +76,30 @@ const playlist = [
         artist: "Sai Bharatlal Ji Masand",
         duration: "5:25",
         src: bhajanSrc("palav-saheb-lord-jhulelal.mp3")
+    },
+    {
+        title: "Tu Mere Saath Hai Guruji - Bade Mandir",
+        artist: "Siddharth Mohan",
+        duration: "3:49",
+        src: bhajanSrc("tu-mere-saath-hai-guruji.mp3")
+    },
+    {
+        title: "Tu Maane Ya Na Maane - Dildara",
+        artist: "Siddharth Mohan",
+        duration: "6:30",
+        src: bhajanSrc("tu-maane-ya-na-maane.mp3")
+    },
+    {
+        title: "Mere Satguru Ji Tussi Mehar Karo",
+        artist: "Siddharth Mohan",
+        duration: "3:32",
+        src: bhajanSrc("mere-satguru-ji-tussi-mehar-karo.mp3")
+    },
+    {
+        title: "Tereya Charana Ch Meri Ardaas Daata Guruji",
+        artist: "Siddharth Mohan",
+        duration: "6:15",
+        src: bhajanSrc("tereya-charana-ch-meri-ardaas.mp3")
     }
 ];
 
