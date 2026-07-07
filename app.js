@@ -42,6 +42,12 @@ const playlist = [
         src: bhajanSrc("shukrana-tera.mp3")
     },
     {
+        title: "Tu Maane Ya Na Maane",
+        artist: "Siddharth Mohan",
+        duration: "6:30",
+        src: bhajanSrc("tu-maane-ya-na-maane.mp3")
+    },
+    {
         title: "Mera Aapki Kripa Se - Guru Jo Dar Rajkot",
         artist: "Sai Bharatlal Ji Masand",
         duration: "4:34",
@@ -82,12 +88,6 @@ const playlist = [
         artist: "Siddharth Mohan",
         duration: "3:49",
         src: bhajanSrc("tu-mere-saath-hai-guruji.mp3")
-    },
-    {
-        title: "Tu Maane Ya Na Maane - Dildara",
-        artist: "Siddharth Mohan",
-        duration: "6:30",
-        src: bhajanSrc("tu-maane-ya-na-maane.mp3")
     },
     {
         title: "Mere Satguru Ji Tussi Mehar Karo",
@@ -708,27 +708,557 @@ function generatePledgeReceipt(event) {
 }
 
 /* ==========================================
-   ARDAAS FORM SUBMISSION
+   SUPPORT US & DONATION SYSTEM
    ========================================== */
-function handleArdaasSubmit(event) {
-    event.preventDefault();
-    
-    const name = document.getElementById("ardaas-name").value;
-    const email = document.getElementById("ardaas-email").value;
-    const phone = document.getElementById("ardaas-phone").value;
-    const msg = document.getElementById("ardaas-message").value;
-    
-    // Visualizing Success Overlay (ripple & modal zoom)
-    const successOverlay = document.getElementById("success-overlay");
-    successOverlay.style.display = "flex";
-    
-    showToast(`Ardaas submitted successfully for ${name}.`);
+function selectAmount(amount) {
+    const presetCards = document.querySelectorAll(".amount-card");
+    presetCards.forEach(card => {
+        if (card.textContent === `₹${amount}`) {
+            card.classList.add("active");
+        } else {
+            card.classList.remove("active");
+        }
+    });
+    const amountInput = document.getElementById("donation-amount");
+    if (amountInput) {
+        amountInput.value = amount;
+    }
 }
 
-function closeSuccessCard() {
-    document.getElementById("success-overlay").style.display = "none";
-    // Reset Form
-    document.getElementById("ardaas-form").reset();
+function clearPresetAmounts() {
+    const presetCards = document.querySelectorAll(".amount-card");
+    presetCards.forEach(card => card.classList.remove("active"));
+}
+
+function copyToClipboard(text, label) {
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => {
+            showToast(`${label} Copied Successfully`);
+        }).catch(err => {
+            console.error("Failed to copy text: ", err);
+            fallbackCopyText(text, label);
+        });
+    } else {
+        fallbackCopyText(text, label);
+    }
+}
+
+function fallbackCopyText(text, label) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.position = "fixed";  // Avoid scrolling to bottom
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+        document.execCommand('copy');
+        showToast(`${label} Copied Successfully`);
+    } catch (err) {
+        console.error('Fallback copy failed', err);
+    }
+    document.body.removeChild(textArea);
+}
+
+function handleDonationSubmit(event) {
+    event.preventDefault();
+
+    const name = document.getElementById("donor-name").value.trim();
+    const phone = document.getElementById("donor-phone").value.trim();
+    const email = document.getElementById("donor-email").value.trim();
+    const city = document.getElementById("donor-city").value.trim();
+    const state = document.getElementById("donor-state").value.trim();
+    const country = document.getElementById("donor-country").value;
+    const amount = parseFloat(document.getElementById("donation-amount").value);
+    const purpose = document.getElementById("donation-purpose").value;
+    const message = document.getElementById("donation-message").value.trim();
+
+    // Basic Validations
+    if (!name) {
+        alert("Please enter your full name.");
+        return;
+    }
+    if (!phone || !/^\d{10}$/.test(phone)) {
+        alert("Please enter a valid 10-digit mobile number.");
+        return;
+    }
+    if (isNaN(amount) || amount <= 0) {
+        alert("Donation amount must be greater than ₹0.");
+        return;
+    }
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        alert("Please enter a valid email address.");
+        return;
+    }
+
+    // Prevent Duplicate Submissions (Disable button & show loading state)
+    const submitBtn = document.getElementById("submit-btn");
+    const originalBtnContent = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `<span class="spinner"></span> <span>Processing...</span>`;
+
+    // Simulate Payment processing delay (UPI/Razorpay placeholder)
+    setTimeout(() => {
+        const randomId = Math.floor(100000 + Math.random() * 900000);
+        const donationId = "GJD-DON-" + randomId;
+        const txnId = "GJD-TXN-" + randomId;
+        const now = new Date();
+        const dateStr = now.toLocaleDateString() + " " + now.toLocaleTimeString();
+
+        // Create new donation object
+        const newDonation = {
+            id: donationId,
+            name: name,
+            phone: phone,
+            email: email || "N/A",
+            city: city || "N/A",
+            state: state || "N/A",
+            country: country,
+            amount: amount,
+            purpose: purpose,
+            message: message || "N/A",
+            status: "Completed",
+            txnId: txnId,
+            dateTime: dateStr,
+            rawDate: now.getTime()
+        };
+
+        // Save to Database (localStorage)
+        let donations = [];
+        try {
+            const saved = localStorage.getItem("gjd_donations");
+            if (saved) {
+                donations = JSON.parse(saved);
+            }
+        } catch (e) {
+            console.warn("localStorage read failed:", e);
+        }
+        donations.unshift(newDonation);
+        try {
+            localStorage.setItem("gjd_donations", JSON.stringify(donations));
+        } catch (e) {
+            console.warn("localStorage write failed:", e);
+        }
+
+        // Reset submit button state
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnContent;
+
+        // Show Success Overlay Modal
+        const successOverlay = document.getElementById("success-overlay");
+        if (successOverlay) {
+            successOverlay.style.display = "flex";
+        }
+
+        showToast(`Thank you, donation of ₹${amount} received successfully.`);
+    }, 1500);
+}
+
+function closeDonationSuccess() {
+    const successOverlay = document.getElementById("success-overlay");
+    if (successOverlay) {
+        successOverlay.style.display = "none";
+    }
+    const form = document.getElementById("donation-form");
+    if (form) {
+        form.reset();
+    }
+    clearPresetAmounts();
+}
+
+/* ==========================================
+   DONATION MANAGEMENT (ADMIN DASHBOARD)
+   ========================================== */
+const MOCK_DONATIONS = [
+    {
+        id: "GJD-DON-928401",
+        name: "Ramesh Sharma",
+        phone: "9876543210",
+        email: "ramesh.sharma@gmail.com",
+        city: "Rajkot",
+        state: "Gujarat",
+        country: "India",
+        amount: 501,
+        purpose: "Langar Seva",
+        message: "Blessings for the family",
+        status: "Completed",
+        txnId: "GJD-TXN-928401",
+        dateTime: "06/28/2026 11:30:15 AM",
+        rawDate: 1782635415000
+    },
+    {
+        id: "GJD-DON-748201",
+        name: "Pooja Masand",
+        phone: "9123456789",
+        email: "pooja.masand@yahoo.com",
+        city: "Bhopal",
+        state: "Madhya Pradesh",
+        country: "India",
+        amount: 2501,
+        purpose: "Temple Development",
+        message: "In memory of late grandparents",
+        status: "Completed",
+        txnId: "GJD-TXN-748201",
+        dateTime: "06/27/2026 05:45:20 PM",
+        rawDate: 1782571520000
+    },
+    {
+        id: "GJD-DON-362810",
+        name: "Kabir Advani",
+        phone: "9988776655",
+        email: "kabir_advani@outlook.com",
+        city: "Orlando",
+        state: "Florida",
+        country: "United States",
+        amount: 1001,
+        purpose: "Education Support",
+        message: "Keep up the noble work!",
+        status: "Completed",
+        txnId: "GJD-TXN-362810",
+        dateTime: "06/26/2026 09:15:00 AM",
+        rawDate: 1782453300000
+    },
+    {
+        id: "GJD-DON-524901",
+        name: "Neha Nanwani",
+        phone: "9624217247",
+        email: "nehananwani@gmail.com",
+        city: "Haridwar",
+        state: "Uttarakhand",
+        country: "India",
+        amount: 101,
+        purpose: "General Donation",
+        message: "Jai Baba Mulram Saheb",
+        status: "Completed",
+        txnId: "GJD-TXN-524901",
+        dateTime: "06/25/2026 08:30:45 PM",
+        rawDate: 1782408645000
+    },
+    {
+        id: "GJD-DON-128472",
+        name: "Anil Masand",
+        phone: "9090100159",
+        email: "anilmasand@gmail.com",
+        city: "Nandurbar",
+        state: "Maharashtra",
+        country: "India",
+        amount: 5001,
+        purpose: "Medical Assistance",
+        message: "Langar and Medical Seva support",
+        status: "Completed",
+        txnId: "GJD-TXN-128472",
+        dateTime: "06/24/2026 02:15:10 PM",
+        rawDate: 1782299710000
+    }
+];
+
+let adminDonations = [];
+let filteredDonations = [];
+let sortField = "date";
+let sortDirection = "desc";
+let currentPage = 1;
+const itemsPerPage = 5;
+
+function initAdminDashboard() {
+    try {
+        const saved = localStorage.getItem("gjd_donations");
+        if (saved) {
+            adminDonations = JSON.parse(saved);
+        } else {
+            adminDonations = [...MOCK_DONATIONS];
+            localStorage.setItem("gjd_donations", JSON.stringify(adminDonations));
+        }
+    } catch (e) {
+        console.warn("Could not read/write local storage admin init:", e);
+        adminDonations = [...MOCK_DONATIONS];
+    }
+    
+    filteredDonations = [...adminDonations];
+    applySort();
+    renderAdminTable();
+}
+
+function renderAdminTable() {
+    const tableBody = document.getElementById("donations-table-body");
+    if (!tableBody) return;
+
+    tableBody.innerHTML = "";
+
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = Math.min(startIndex + itemsPerPage, filteredDonations.length);
+    const paginatedItems = filteredDonations.slice(startIndex, endIndex);
+
+    if (paginatedItems.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="7" class="text-center" style="padding: 30px; color: var(--text-muted);">No donations found matching criteria.</td></tr>`;
+        document.getElementById("pagination-stats").innerText = "Showing 0 to 0 of 0 entries";
+        renderAdminPagination(0);
+        return;
+    }
+
+    paginatedItems.forEach(item => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td style="font-weight: 600;">${item.id}</td>
+            <td>
+                <div style="font-weight: 600;">${item.name}</div>
+                <div style="font-size: 0.8rem; color: var(--text-muted);">${item.phone}</div>
+            </td>
+            <td style="font-weight: 700; color: var(--primary-gold);">₹${item.amount}</td>
+            <td>${item.purpose}</td>
+            <td><span class="status-badge ${item.status.toLowerCase()}">${item.status}</span></td>
+            <td style="font-size: 0.85rem; color: var(--text-muted);">${item.dateTime}</td>
+            <td>
+                <button type="button" class="btn-view-details" onclick="viewDonationDetails('${item.id}')">
+                    <i class="fa-solid fa-eye"></i> View
+                </button>
+            </td>
+        `;
+        tableBody.appendChild(row);
+    });
+
+    document.getElementById("pagination-stats").innerText = `Showing ${startIndex + 1} to ${endIndex} of ${filteredDonations.length} entries`;
+    
+    const totalPages = Math.ceil(filteredDonations.length / itemsPerPage);
+    renderAdminPagination(totalPages);
+}
+
+function renderAdminPagination(totalPages) {
+    const controls = document.getElementById("pagination-controls-wrapper");
+    if (!controls) return;
+
+    controls.innerHTML = "";
+
+    if (totalPages <= 1) return;
+
+    // Previous Button
+    const prevBtn = document.createElement("button");
+    prevBtn.className = "btn-page";
+    prevBtn.disabled = currentPage === 1;
+    prevBtn.innerHTML = `<i class="fa-solid fa-chevron-left"></i>`;
+    prevBtn.onclick = () => {
+        if (currentPage > 1) {
+            currentPage--;
+            renderAdminTable();
+        }
+    };
+    controls.appendChild(prevBtn);
+
+    // Page Buttons
+    for (let i = 1; i <= totalPages; i++) {
+        const pageBtn = document.createElement("button");
+        pageBtn.className = `btn-page ${i === currentPage ? 'active' : ''}`;
+        pageBtn.innerText = i;
+        pageBtn.onclick = () => {
+            currentPage = i;
+            renderAdminTable();
+        };
+        controls.appendChild(pageBtn);
+    }
+
+    // Next Button
+    const nextBtn = document.createElement("button");
+    nextBtn.className = "btn-page";
+    nextBtn.disabled = currentPage === totalPages;
+    nextBtn.innerHTML = `<i class="fa-solid fa-chevron-right"></i>`;
+    nextBtn.onclick = () => {
+        if (currentPage < totalPages) {
+            currentPage++;
+            renderAdminTable();
+        }
+    };
+    controls.appendChild(nextBtn);
+}
+
+function handleAdminSearch() {
+    const query = document.getElementById("admin-search").value.toLowerCase().trim();
+    currentPage = 1;
+    applyFilterAndSearch(query);
+}
+
+function handleAdminFilter() {
+    currentPage = 1;
+    const query = document.getElementById("admin-search").value.toLowerCase().trim();
+    applyFilterAndSearch(query);
+}
+
+function applyFilterAndSearch(searchQuery) {
+    const purposeVal = document.getElementById("filter-purpose").value;
+    const statusVal = document.getElementById("filter-status").value;
+
+    filteredDonations = adminDonations.filter(item => {
+        const matchesSearch = !searchQuery || 
+            item.name.toLowerCase().includes(searchQuery) ||
+            item.phone.toLowerCase().includes(searchQuery) ||
+            item.email.toLowerCase().includes(searchQuery) ||
+            item.id.toLowerCase().includes(searchQuery) ||
+            item.txnId.toLowerCase().includes(searchQuery);
+
+        const matchesPurpose = !purposeVal || item.purpose === purposeVal;
+        const matchesStatus = !statusVal || item.status === statusVal;
+
+        return matchesSearch && matchesPurpose && matchesStatus;
+    });
+
+    applySort();
+    renderAdminTable();
+}
+
+function sortTable(field) {
+    if (sortField === field) {
+        sortDirection = sortDirection === "asc" ? "desc" : "asc";
+    } else {
+        sortField = field;
+        sortDirection = "asc";
+    }
+
+    // Update Sorting Icons
+    const fields = ["id", "name", "amount", "purpose", "status", "date"];
+    fields.forEach(f => {
+        const icon = document.getElementById(`sort-icon-${f}`);
+        if (icon) {
+            if (f === field) {
+                icon.className = sortDirection === "asc" ? "fa-solid fa-sort-up" : "fa-solid fa-sort-down";
+            } else {
+                icon.className = "fa-solid fa-sort";
+            }
+        }
+    });
+
+    applySort();
+    renderAdminTable();
+}
+
+function applySort() {
+    filteredDonations.sort((a, b) => {
+        let valA, valB;
+        if (sortField === "amount") {
+            valA = a.amount;
+            valB = b.amount;
+        } else if (sortField === "date") {
+            valA = a.rawDate || 0;
+            valB = b.rawDate || 0;
+        } else if (sortField === "id") {
+            valA = a.id;
+            valB = b.id;
+        } else if (sortField === "name") {
+            valA = a.name.toLowerCase();
+            valB = b.name.toLowerCase();
+        } else if (sortField === "purpose") {
+            valA = a.purpose.toLowerCase();
+            valB = b.purpose.toLowerCase();
+        } else {
+            valA = a.status.toLowerCase();
+            valB = b.status.toLowerCase();
+        }
+
+        if (valA < valB) return sortDirection === "asc" ? -1 : 1;
+        if (valA > valB) return sortDirection === "asc" ? 1 : -1;
+        return 0;
+    });
+}
+
+function viewDonationDetails(id) {
+    const item = adminDonations.find(d => d.id === id);
+    if (!item) return;
+
+    const modal = document.getElementById("details-modal");
+    const container = document.getElementById("modal-details-content");
+
+    if (modal && container) {
+        container.innerHTML = `
+            <div class="admin-detail-item">
+                <div class="admin-detail-label">Donation ID</div>
+                <div class="admin-detail-value">${item.id}</div>
+            </div>
+            <div class="admin-detail-item">
+                <div class="admin-detail-label">Transaction ID</div>
+                <div class="admin-detail-value">${item.txnId}</div>
+            </div>
+            <div class="admin-detail-item">
+                <div class="admin-detail-label">Donor Name</div>
+                <div class="admin-detail-value">${item.name}</div>
+            </div>
+            <div class="admin-detail-item">
+                <div class="admin-detail-label">Mobile Number</div>
+                <div class="admin-detail-value">${item.phone}</div>
+            </div>
+            <div class="admin-detail-item">
+                <div class="admin-detail-label">Email Address</div>
+                <div class="admin-detail-value">${item.email}</div>
+            </div>
+            <div class="admin-detail-item">
+                <div class="admin-detail-label">Donation Amount</div>
+                <div class="admin-detail-value" style="color: var(--primary-gold); font-weight: 700;">₹${item.amount}</div>
+            </div>
+            <div class="admin-detail-item">
+                <div class="admin-detail-label">Purpose</div>
+                <div class="admin-detail-value">${item.purpose}</div>
+            </div>
+            <div class="admin-detail-item">
+                <div class="admin-detail-label">Payment Status</div>
+                <div class="admin-detail-value"><span class="status-badge ${item.status.toLowerCase()}">${item.status}</span></div>
+            </div>
+            <div class="admin-detail-item">
+                <div class="admin-detail-label">Location</div>
+                <div class="admin-detail-value">${item.city}, ${item.state}, ${item.country}</div>
+            </div>
+            <div class="admin-detail-item">
+                <div class="admin-detail-label">Date & Time</div>
+                <div class="admin-detail-value">${item.dateTime}</div>
+            </div>
+            <div class="admin-detail-item">
+                <div class="admin-detail-label">Message</div>
+                <div class="admin-detail-value" style="white-space: pre-line;">${item.message}</div>
+            </div>
+        `;
+        modal.style.display = "flex";
+    }
+}
+
+function closeDetailsModal() {
+    const modal = document.getElementById("details-modal");
+    if (modal) modal.style.display = "none";
+}
+
+function exportToExcel() {
+    if (filteredDonations.length === 0) {
+        showToast("No records available to export");
+        return;
+    }
+
+    let csvContent = "data:text/csv;charset=utf-8,";
+    csvContent += "Donation ID,Donor Name,Mobile,Email,City,State,Country,Amount,Purpose,Status,Transaction ID,Date & Time,Message\n";
+
+    filteredDonations.forEach(item => {
+        const row = [
+            `"${item.id}"`,
+            `"${item.name.replace(/"/g, '""')}"`,
+            `"${item.phone}"`,
+            `"${item.email.replace(/"/g, '""')}"`,
+            `"${item.city.replace(/"/g, '""')}"`,
+            `"${item.state.replace(/"/g, '""')}"`,
+            `"${item.country}"`,
+            item.amount,
+            `"${item.purpose}"`,
+            `"${item.status}"`,
+            `"${item.txnId}"`,
+            `"${item.dateTime}"`,
+            `"${item.message.replace(/"/g, '""').replace(/\n/g, ' ')}"`
+        ].join(",");
+        csvContent += row + "\n";
+    });
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", `Guru_Jo_Dar_Donations_${new Date().toISOString().split('T')[0]}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    showToast("Exported to Excel (CSV) successfully");
+}
+
+function exportToPDF() {
+    window.print();
 }
 
 /* ==========================================
@@ -762,15 +1292,26 @@ window.toggleMobileMenu = toggleMobileMenu;
 window.switchTab = switchTab;
 window.switchMiracleTab = switchMiracleTab;
 window.selectTrack = selectTrack;
-window.closeSuccessCard = closeSuccessCard;
 window.closeSevaModal = closeSevaModal;
 window.openSevaModal = openSevaModal;
 window.generatePledgeReceipt = generatePledgeReceipt;
-window.handleArdaasSubmit = handleArdaasSubmit;
 window.togglePlayBhajan = togglePlayBhajan;
 window.prevTrack = prevTrack;
 window.nextTrack = nextTrack;
 window.toggleMute = toggleMute;
 window.seekAudio = seekAudio;
 window.showToast = showToast;
-
+window.selectAmount = selectAmount;
+window.clearPresetAmounts = clearPresetAmounts;
+window.copyToClipboard = copyToClipboard;
+window.handleDonationSubmit = handleDonationSubmit;
+window.closeDonationSuccess = closeDonationSuccess;
+window.initAdminDashboard = initAdminDashboard;
+window.renderAdminTable = renderAdminTable;
+window.handleAdminSearch = handleAdminSearch;
+window.handleAdminFilter = handleAdminFilter;
+window.sortTable = sortTable;
+window.viewDonationDetails = viewDonationDetails;
+window.closeDetailsModal = closeDetailsModal;
+window.exportToExcel = exportToExcel;
+window.exportToPDF = exportToPDF;

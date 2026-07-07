@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Us - Guru Jo Dar</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body data-page="support" class="inner-page">
+    <audio id="ambient-audio" loop preload="metadata"></audio>
+    <div id="site-header"></div>
+    <div id="site-drawer"></div>
+    
+    <main class="page-main">
+        <section id="support" class="section-padding">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 data-en="Support Guru Jo Dar Foundation" data-hi="गुरु जो दर फाउंडेशन को सहयोग करें" data-sd="गुरु जो दर फाउंडेशन जी सहायता कर्यो">Support Guru Jo Dar Foundation</h2>
+                    <div class="divider"></div>
+                    <p class="section-subtitle" data-en="Your generous contribution helps Guru Jo Dar Foundation continue its spiritual, charitable, educational, and community welfare initiatives. Every contribution, big or small, is an act of Seva and helps us serve humanity with devotion." data-hi="आपका उदार योगदान गुरु जो दर फाउंडेशन को अपनी आध्यात्मिक, धर्मार्थ, शैक्षिक और सामुदायिक कल्याण पहलों को जारी रखने में मदद करता है। प्रत्येक योगदान, बड़ा या छोटा, सेवा का एक कार्य है और हमें भक्ति के साथ मानवता की सेवा करने में मदद करता है।" data-sd="तव्हां जो उदार दान गुरु जो दर फाउंडेशन खे संदी रूहानी, भलाई, तालीमी ऐं लोक कल्याण जे कामान खे जारी रखण में मदद कंदो। हर दान, नंढो या वडो, सेवा जो कम आहे ऐं असांखे इंसानियत जी सेवा करण में मदद कंदो।">Your generous contribution helps Guru Jo Dar Foundation continue its spiritual, charitable, educational, and community welfare initiatives. Every contribution, big or small, is an act of Seva and helps us serve humanity with devotion.</p>
+                </div>
+
+                <div class="support-grid">
+                    <!-- Donation Form Card -->
+                    <div class="support-form-card">
+                        <form id="donation-form" onsubmit="handleDonationSubmit(event)">
+                            <h3 style="margin-bottom: 25px; font-family: var(--font-heading); color: var(--primary-gold);" data-en="Donor Details" data-hi="दाता का विवरण" data-sd="दाता जो तफ़सील">Donor Details</h3>
+                            
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="donor-name" data-en="Full Name *" data-hi="पूरा नाम *" data-sd="नालो *">Full Name *</label>
+                                    <input type="text" id="donor-name" required placeholder="Enter full name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="donor-phone" data-en="Mobile Number *" data-hi="मोबाइल नंबर *" data-sd="मोबाइल नंबर *">Mobile Number *</label>
+                                    <input type="tel" id="donor-phone" required pattern="[0-9]{10}" placeholder="10-digit mobile number">
+                                </div>
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="donor-email" data-en="Email Address (Optional)" data-hi="ईमेल पता (वैकल्पिक)" data-sd="ईमेल पत्तो (वैकल्पिक)">Email Address (Optional)</label>
+                                    <input type="email" id="donor-email" placeholder="yourname@domain.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="donor-city" data-en="City (Optional)" data-hi="शहर (वैकल्पिक)" data-sd="शहर (वैकल्पिक)">City (Optional)</label>
+                                    <input type="text" id="donor-city" placeholder="Enter city">
+                                </div>
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="donor-state" data-en="State (Optional)" data-hi="राज्य (वैकल्पिक)" data-sd="राज्य (वैकल्पिक)">State (Optional)</label>
+                                    <input type="text" id="donor-state" placeholder="Enter state">
+                                </div>
+                                <div class="form-group">
+                                    <label for="donor-country" data-en="Country" data-hi="देश" data-sd="देश">Country</label>
+                                    <select id="donor-country">
+                                        <option value="India">India</option>
+                                        <option value="United States">United States</option>
+                                        <option value="United Kingdom">United Kingdom</option>
+                                        <option value="Canada">Canada</option>
+                                        <option value="Australia">Australia</option>
+                                        <option value="United Arab Emirates">United Arab Emirates</option>
+                                        <option value="Singapore">Singapore</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <h3 style="margin-top: 40px; margin-bottom: 25px; font-family: var(--font-heading); color: var(--primary-gold);" data-en="Donation Details" data-hi="दान का विवरण" data-sd="दान जो तफ़सील">Donation Details</h3>
+
+                            <div class="form-group">
+                                <label data-en="Select Amount" data-hi="राशि चुनें" data-sd="रक़म चुणो">Select Amount</label>
+                                <div class="amount-cards">
+                                    <div class="amount-card" onclick="selectAmount(101)">₹101</div>
+                                    <div class="amount-card" onclick="selectAmount(251)">₹251</div>
+                                    <div class="amount-card" onclick="selectAmount(501)">₹501</div>
+                                    <div class="amount-card" onclick="selectAmount(1001)">₹1001</div>
+                                    <div class="amount-card" onclick="selectAmount(2501)">₹2501</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group custom-amount-group">
+                                <label for="donation-amount" data-en="Donation Amount (₹) *" data-hi="दान राशि (₹) *" data-sd="दान रक़म (₹) *">Donation Amount (₹) *</label>
+                                <div class="custom-amount-wrapper">
+                                    <span class="custom-amount-symbol">₹</span>
+                                    <input type="number" id="donation-amount" required min="1" oninput="clearPresetAmounts()" placeholder="Enter donation amount">
+                                </div>
+                            </div>
+
+                            <div class="form-grid" style="margin-top: 25px;">
+                                <div class="form-group">
+                                    <label for="donation-purpose" data-en="Donation Purpose" data-hi="दान का उद्देश्य" data-sd="दान जो हेतु">Donation Purpose</label>
+                                    <select id="donation-purpose">
+                                        <option value="General Donation">General Donation</option>
+                                        <option value="Temple Development">Temple Development</option>
+                                        <option value="Langar Seva">Langar Seva</option>
+                                        <option value="Education Support">Education Support</option>
+                                        <option value="Medical Assistance">Medical Assistance</option>
+                                        <option value="Community Welfare">Community Welfare</option>
+                                        <option value="Festival Seva">Festival Seva</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="donation-message" data-en="Message (Optional)" data-hi="संदेश (वैकल्पिक)" data-sd="संदेश (वैकल्पिक)">Message (Optional)</label>
+                                <textarea id="donation-message" rows="4" placeholder="Share your blessings or message..."></textarea>
+                            </div>
+
+                            <div style="margin-top: 35px;">
+                                <button type="submit" id="submit-btn" class="btn btn-primary btn-wide spinner-btn">
+                                    <span data-en="Proceed to Donate" data-hi="दान करने के लिए आगे बढ़ें" data-sd="दान करण लाय अगते वधो">Proceed to Donate</span>
+                                    <i class="fa-solid fa-heart"></i>
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Success Modal Overlay -->
+                        <div class="success-overlay" id="success-overlay" style="display: none;">
+                            <div class="ripple-ring ring-1"></div>
+                            <div class="ripple-ring ring-2"></div>
+                            <div class="success-card">
+                                <div class="success-icon" style="color: var(--primary-gold);"><i class="fa-solid fa-circle-check"></i></div>
+                                <h3 data-en="Thank You for Your Seva 🙏" data-hi="आपकी सेवा के लिए धन्यवाद 🙏" data-sd="तव्हां जी सेवा लाय मेहरबानी 🙏">Thank You for Your Seva 🙏</h3>
+                                <p data-en="Your contribution has been received successfully. May Guru Ji bless you and your family with happiness, peace, and prosperity." data-hi="आपका योगदान सफलतापूर्वक प्राप्त हो गया है। गुरु जी आपको और आपके परिवार को सुख, शांति और समृद्धि प्रदान करें।" data-sd="तव्हां जो दान स्वीकार थी वियो आहे। गुरु साहिब तव्हां खे ऐं तव्हां जे परिवार खे सुख, शांति ऐं तरक़्क़ी प्रदान कंदो।">Your contribution has been received successfully. May Guru Ji bless you and your family with happiness, peace, and prosperity.</p>
+                                <div style="display: flex; flex-direction: column; gap: 10px; width: 100%; margin-top: 15px;">
+                                    <button class="btn btn-primary btn-sm" onclick="location.href='../index.html'" data-en="Back to Home" data-hi="मुख्य पृष्ठ पर जाएं" data-sd="मुख्य पृष्ठ ते वञो">Back to Home</button>
+                                    <button class="btn btn-secondary btn-sm" onclick="closeDonationSuccess()" data-en="Make Another Donation" data-hi="दूसरा दान करें" data-sd="बीयो दान कर्यो">Make Another Donation</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar Cards (Bank details & QR code) -->
+                    <div class="support-sidebar">
+                        <!-- Bank Details Card -->
+                        <div class="bank-details-card">
+                            <h3 data-en="Bank Details" data-hi="बैंक का विवरण" data-sd="बँक जो तफ़सील">Bank Details</h3>
+                            
+                            <div class="bank-detail-item">
+                                <span class="bank-detail-label" data-en="Account Name" data-hi="खाता धारक का नाम" data-sd="खाते जो नालो">Account Name</span>
+                                <div class="bank-detail-value-wrapper">
+                                    <span class="bank-detail-value">Guru Jo Dar Foundation</span>
+                                </div>
+                            </div>
+                            
+                            <div class="bank-detail-item">
+                                <span class="bank-detail-label" data-en="Bank Name" data-hi="बैंक का नाम" data-sd="बँक जो नालो">Bank Name</span>
+                                <div class="bank-detail-value-wrapper">
+                                    <span class="bank-detail-value">HDFC Bank Ltd.</span>
+                                </div>
+                            </div>
+
+                            <div class="bank-detail-item">
+                                <span class="bank-detail-label" data-en="Account Number" data-hi="खाता संख्या" data-sd="खाते जो नंबर">Account Number</span>
+                                <div class="bank-detail-value-wrapper">
+                                    <span class="bank-detail-value">50200100795080</span>
+                                    <button type="button" class="copy-btn" onclick="copyToClipboard('50200100795080', 'Account Number')" title="Copy Account Number">
+                                        <i class="fa-solid fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="bank-detail-item">
+                                <span class="bank-detail-label" data-en="IFSC Code" data-hi="आईएफएससी कोड" data-sd="IFSC कोड">IFSC Code</span>
+                                <div class="bank-detail-value-wrapper">
+                                    <span class="bank-detail-value">HDFC0000379</span>
+                                    <button type="button" class="copy-btn" onclick="copyToClipboard('HDFC0000379', 'IFSC Code')" title="Copy IFSC Code">
+                                        <i class="fa-solid fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="bank-detail-item">
+                                <span class="bank-detail-label" data-en="Branch" data-hi="शाखा" data-sd="शाखा">Branch</span>
+                                <div class="bank-detail-value-wrapper">
+                                    <span class="bank-detail-value">Kalawad Road, Rajkot</span>
+                                </div>
+                            </div>
+
+                            <div class="bank-detail-item">
+                                <span class="bank-detail-label" data-en="Email" data-hi="ईमेल" data-sd="ईमेल">Email</span>
+                                <div class="bank-detail-value-wrapper">
+                                    <span class="bank-detail-value" style="font-size: 0.95rem;">gurujodarfoundation@gmail.com</span>
+                                    <button type="button" class="copy-btn" onclick="copyToClipboard('gurujodarfoundation@gmail.com', 'Email')" title="Copy Email">
+                                        <i class="fa-solid fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="bank-detail-item">
+                                <span class="bank-detail-label" data-en="Contact Details" data-hi="संपर्क विवरण" data-sd="सम्पर्क तफ़सील">Contact Details</span>
+                                <div class="bank-detail-value-wrapper" style="margin-bottom: 8px;">
+                                    <span class="bank-detail-value">96242 17247</span>
+                                    <button type="button" class="copy-btn" onclick="copyToClipboard('9624217247', 'Contact Number')" title="Copy Contact Number">
+                                        <i class="fa-solid fa-copy"></i>
+                                    </button>
+                                </div>
+                                <div class="bank-detail-value-wrapper">
+                                    <span class="bank-detail-value">90901 00159</span>
+                                    <button type="button" class="copy-btn" onclick="copyToClipboard('9090100159', 'Contact Number')" title="Copy Contact Number">
+                                        <i class="fa-solid fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- QR Code Card -->
+                        <div class="qr-code-card">
+                            <h3 data-en="Scan & Pay" data-hi="स्कैन और भुगतान" data-sd="स्कैन ऐं भुगतान">Scan & Pay</h3>
+                            <div class="qr-image-container">
+                                <img src="../assets/qr_code.png" alt="Scan to support Guru Jo Dar Foundation">
+                            </div>
+                            <p class="scan-pay-text" data-en="Support via UPI" data-hi="UPI के माध्यम से सहयोग करें" data-sd="UPI द्वरा दान कर्यो">Support via UPI</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="toast-container" class="toast-container"></div>
+    <div id="site-footer"></div>
+    
+    <script src="../site-layout.js" data-base="../"></script>
+    <script src="../app.js"></script>
+</body>
+</html>

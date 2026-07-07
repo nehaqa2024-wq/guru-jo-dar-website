@@ -28,7 +28,7 @@ const pages = [
     { slug: "bhajans", id: "bhajans", title: "Bhajans - Guru Jo Dar", page: "bhajans" },
     { slug: "seva", id: "seva", title: "Seva - Guru Jo Dar", page: "seva" },
     { slug: "gallery", id: "gallery", title: "Gallery - Guru Jo Dar", page: "gallery" },
-    { slug: "ardaas", id: "ardaas", title: "Ardaas - Guru Jo Dar", page: "ardaas" },
+    { slug: "support", id: "support", title: "Support Us - Guru Jo Dar", page: "support" },
     { slug: "contact", id: "contact", title: "Contact - Guru Jo Dar", page: "contact" }
 ];
 
@@ -134,7 +134,7 @@ ${homeHead}
     <div id="site-header"></div>
     <div id="site-drawer"></div>
     <main>
-${hero.replace('href="#ardaas"', 'href="ardaas/"').replace('href="#bhajans"', 'href="bhajans/"')}
+${hero.replace('href="#support"', 'href="support/"').replace('href="#bhajans"', 'href="bhajans/"')}
     </main>
     <div id="toast-container" class="toast-container"></div>
     <div id="site-footer"></div>

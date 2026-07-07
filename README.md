@@ -1,6 +1,6 @@
 # Guru Jo Dar
 
-Spiritual website dedicated to **Baba Mulram Saheb** — legacy, bhajans, seva, gallery, ardaas, and contact.
+Spiritual website dedicated to **Baba Mulram Saheb** — legacy, bhajans, seva, gallery, support, and contact.
 
 ## Local preview
 

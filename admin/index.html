@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Management - Guru Jo Dar</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        @media print {
+            .main-header, .mobile-drawer, .main-footer, .filters-bar, .admin-actions, .pagination-bar, .btn-view-details {
+                display: none !important;
+            }
+            body {
+                background: #fff !important;
+                color: #000 !important;
+            }
+            .admin-dashboard-card {
+                border: none !important;
+                box-shadow: none !important;
+                background: transparent !important;
+                padding: 0 !important;
+            }
+            .donations-table th {
+                color: #000 !important;
+                border-bottom: 2px solid #000 !important;
+            }
+            .donations-table td {
+                border-bottom: 1px solid #ddd !important;
+            }
+        }
+    </style>
+</head>
+<body data-page="admin" class="inner-page">
+    <audio id="ambient-audio" loop preload="metadata"></audio>
+    <div id="site-header"></div>
+    <div id="site-drawer"></div>
+
+    <main class="page-main">
+        <section class="section-padding">
+            <div class="container">
+                <div class="admin-header-actions">
+                    <div class="admin-title-group">
+                        <h2 data-en="Donation Management" data-hi="दान प्रबंधन" data-sd="दान प्रबंधन">Donation Management</h2>
+                        <p data-en="Review, filter, and export donations received by Guru Jo Dar Foundation" data-hi="गुरु जो दर फाउंडेशन द्वारा प्राप्त दान की समीक्षा, फ़िल्टर और निर्यात करें" data-sd="गुरु जो दर फाउंडेशन जे दान जो मन्सूबा ऐं रिपोर्ट">Review, filter, and export donations received by Guru Jo Dar Foundation</p>
+                    </div>
+                    <div class="admin-actions">
+                        <button type="button" class="btn-export" onclick="exportToExcel()">
+                            <i class="fa-solid fa-file-excel"></i> Export to Excel
+                        </button>
+                        <button type="button" class="btn-export" onclick="exportToPDF()">
+                            <i class="fa-solid fa-file-pdf"></i> Export to PDF
+                        </button>
+                    </div>
+                </div>
+
+                <div class="admin-dashboard-card">
+                    <!-- Search and Filters Bar -->
+                    <div class="filters-bar">
+                        <div class="search-wrapper">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" id="admin-search" placeholder="Search by name, mobile, email, or transaction ID..." oninput="handleAdminSearch()">
+                        </div>
+                        <select id="filter-purpose" class="filter-select" onchange="handleAdminFilter()">
+                            <option value="" data-en="All Purposes" data-hi="सभी उद्देश्य" data-sd="सभ हेतु">All Purposes</option>
+                            <option value="General Donation">General Donation</option>
+                            <option value="Temple Development">Temple Development</option>
+                            <option value="Langar Seva">Langar Seva</option>
+                            <option value="Education Support">Education Support</option>
+                            <option value="Medical Assistance">Medical Assistance</option>
+                            <option value="Community Welfare">Community Welfare</option>
+                            <option value="Festival Seva">Festival Seva</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <select id="filter-status" class="filter-select" onchange="handleAdminFilter()">
+                            <option value="" data-en="All Statuses" data-hi="सभी स्थितियाँ" data-sd="सभ स्थिति">All Statuses</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Pending">Pending</option>
+                        </select>
+                    </div>
+
+                    <!-- Donations Data Table -->
+                    <div class="donations-table-wrapper">
+                        <table class="donations-table">
+                            <thead>
+                                <tr>
+                                    <th onclick="sortTable('id')">Donation ID <i id="sort-icon-id" class="fa-solid fa-sort"></i></th>
+                                    <th onclick="sortTable('name')">Donor Name <i id="sort-icon-name" class="fa-solid fa-sort"></i></th>
+                                    <th onclick="sortTable('amount')">Amount <i id="sort-icon-amount" class="fa-solid fa-sort"></i></th>
+                                    <th onclick="sortTable('purpose')">Purpose <i id="sort-icon-purpose" class="fa-solid fa-sort"></i></th>
+                                    <th onclick="sortTable('status')">Status <i id="sort-icon-status" class="fa-solid fa-sort"></i></th>
+                                    <th onclick="sortTable('date')">Date & Time <i id="sort-icon-date" class="fa-solid fa-sort"></i></th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="donations-table-body">
+                                <!-- Populated dynamically by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination and Stats Bar -->
+                    <div class="pagination-bar">
+                        <div id="pagination-stats">Showing 0 to 0 of 0 entries</div>
+                        <div class="pagination-controls" id="pagination-controls-wrapper">
+                            <!-- Populated dynamically by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Details View Modal -->
+    <div class="modal" id="details-modal" style="display: none;">
+        <div class="modal-content" style="max-width: 650px;">
+            <button class="modal-close" onclick="closeDetailsModal()"><i class="fa-solid fa-xmark"></i></button>
+            <h3 style="font-family: var(--font-heading); color: var(--primary-gold); margin-bottom: 20px;" data-en="Donation Details" data-hi="दान का विवरण" data-sd="दान जी तफ़सील">Donation Details</h3>
+            
+            <div class="admin-modal-grid" id="modal-details-content">
+                <!-- Loaded dynamically -->
+            </div>
+            
+            <div style="margin-top: 30px; text-align: right;">
+                <button class="btn btn-secondary btn-sm" onclick="closeDetailsModal()" data-en="Close" data-hi="बंद करें" data-sd="बंद कर्यो">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container" class="toast-container"></div>
+    <div id="site-footer"></div>
+
+    <script src="../site-layout.js" data-base="../"></script>
+    <script src="../app.js"></script>
+    <script>
+        // Inline setup for admin script that handles filtering, pagination, sorting, detail popups, and exports.
+        document.addEventListener("DOMContentLoaded", () => {
+            initAdminDashboard();
+        });
+    </script>
+</body>
+</html>

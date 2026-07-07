@@ -10,7 +10,7 @@
         { id: "bhajans", path: base + "bhajans/index.html", label: { en: "Bhajans", hi: "भजन", sd: "भजन" } },
         { id: "seva", path: base + "seva/index.html", label: { en: "Seva", hi: "सेवा", sd: "सेवा" } },
         { id: "gallery", path: base + "gallery/index.html", label: { en: "Gallery", hi: "गैलरी", sd: "गैलरी" } },
-        { id: "ardaas", path: base + "ardaas/index.html", label: { en: "Ardaas", hi: "अरदास", sd: "अरदास" } },
+        { id: "support", path: base + "support/index.html", label: { en: "Support Us", hi: "सहयोग करें", sd: "सहयोग कर्यो" } },
         { id: "contact", path: base + "contact/index.html", label: { en: "Contact", hi: "संपर्क", sd: "संपर्क" } }
     ];
 
@@ -101,7 +101,7 @@
                     <li><a href="${base}history/index.html">Legacy</a></li>
                     <li><a href="${base}bhajans/index.html">Bhajans</a></li>
                     <li><a href="${base}seva/index.html">Seva</a></li>
-                    <li><a href="${base}ardaas/index.html">Ardaas Request</a></li>
+                    <li><a href="${base}support/index.html" data-en="Support Us" data-hi="सहयोग करें" data-sd="सहयोग कर्यो">Support Us</a></li>
                 </ul>
             </div>
             <div class="footer-timings">
