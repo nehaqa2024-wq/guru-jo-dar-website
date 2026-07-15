@@ -759,6 +759,8 @@ function fallbackCopyText(text, label) {
     document.body.removeChild(textArea);
 }
 
+let lastSubmittedDonation = null;
+
 function handleDonationSubmit(event) {
     event.preventDefault();
 
@@ -822,6 +824,8 @@ function handleDonationSubmit(event) {
             rawDate: now.getTime()
         };
 
+        lastSubmittedDonation = newDonation;
+
         // Save to Database (localStorage)
         let donations = [];
         try {
@@ -863,6 +867,154 @@ function closeDonationSuccess() {
         form.reset();
     }
     clearPresetAmounts();
+}
+
+function downloadLastDonationReceipt() {
+    if (!lastSubmittedDonation) {
+        showToast("No donation receipt found to download");
+        return;
+    }
+    
+    const item = lastSubmittedDonation;
+    const printWindow = window.open("", "_blank", "width=600,height=700");
+    
+    const receiptHtml = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Donation Receipt - Guru Jo Dar</title>
+        <style>
+            body {
+                font-family: 'Inter', sans-serif;
+                background-color: #ffffff;
+                color: #333333;
+                padding: 30px;
+                margin: 0;
+            }
+            .receipt-container {
+                border: 2px solid #D4AF37;
+                border-radius: 8px;
+                padding: 30px;
+                max-width: 500px;
+                margin: 0 auto;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            }
+            .header {
+                text-align: center;
+                border-bottom: 2px dashed #D4AF37;
+                padding-bottom: 20px;
+                margin-bottom: 25px;
+            }
+            .header h2 {
+                color: #D4AF37;
+                margin: 0 0 5px 0;
+                font-family: 'Playfair Display', serif;
+                font-size: 24px;
+            }
+            .header p {
+                margin: 0;
+                font-size: 14px;
+                color: #666;
+            }
+            .row {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 15px;
+                font-size: 14px;
+                border-bottom: 1px solid #eeeeee;
+                padding-bottom: 8px;
+            }
+            .label {
+                font-weight: 600;
+                color: #555;
+            }
+            .value {
+                font-weight: 500;
+                color: #111;
+                text-align: right;
+            }
+            .amount {
+                font-size: 20px;
+                color: #D4AF37;
+                font-weight: 700;
+            }
+            .footer {
+                text-align: center;
+                margin-top: 30px;
+                font-size: 12px;
+                color: #777;
+                font-style: italic;
+                border-top: 1px dashed #D4AF37;
+                padding-top: 15px;
+            }
+            @media print {
+                body { padding: 0; }
+                .receipt-container { box-shadow: none; border: 2px solid #D4AF37; }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="receipt-container">
+            <div class="header">
+                <h2>Guru Jo Dar Foundation</h2>
+                <p>Spiritual & Charitable Sanctuary</p>
+                <p style="font-size: 11px; margin-top: 5px;">Rajkot, Gujarat, India</p>
+            </div>
+            
+            <div class="row">
+                <span class="label">Donation ID</span>
+                <span class="value" style="font-family: monospace; font-weight: bold;">\${item.id}</span>
+            </div>
+            <div class="row">
+                <span class="label">Transaction ID</span>
+                <span class="value" style="font-family: monospace;">\${item.txnId}</span>
+            </div>
+            <div class="row">
+                <span class="label">Donor Name</span>
+                <span class="value">\${item.name}</span>
+            </div>
+            <div class="row">
+                <span class="label">Mobile Number</span>
+                <span class="value">\${item.phone}</span>
+            </div>
+            <div class="row">
+                <span class="label">Email Address</span>
+                <span class="value">\${item.email}</span>
+            </div>
+            <div class="row">
+                <span class="label">Donation Amount</span>
+                <span class="value amount">₹\${item.amount}</span>
+            </div>
+            <div class="row">
+                <span class="label">Purpose</span>
+                <span class="value">\${item.purpose}</span>
+            </div>
+            <div class="row">
+                <span class="label">Payment Status</span>
+                <span class="value" style="color: #14b8a6; font-weight: bold;">\${item.status}</span>
+            </div>
+            <div class="row">
+                <span class="label">Date & Time</span>
+                <span class="value">\${item.dateTime}</span>
+            </div>
+            
+            <div class="footer">
+                <p>"May Baba Mulram Saheb shower his divine blessings upon you and your family."</p>
+                <p style="margin-top: 10px; font-weight: bold; font-style: normal; color: #D4AF37;">Thank You for Your Seva 🙏</p>
+            </div>
+        </div>
+        <script>
+            window.onload = function() {
+                window.print();
+                setTimeout(function() { window.close(); }, 500);
+            };
+        <\/script>
+    </body>
+    </html>
+    `;
+    
+    printWindow.document.write(receiptHtml);
+    printWindow.document.close();
 }
 
 /* ==========================================
@@ -1306,6 +1458,7 @@ window.clearPresetAmounts = clearPresetAmounts;
 window.copyToClipboard = copyToClipboard;
 window.handleDonationSubmit = handleDonationSubmit;
 window.closeDonationSuccess = closeDonationSuccess;
+window.downloadLastDonationReceipt = downloadLastDonationReceipt;
 window.initAdminDashboard = initAdminDashboard;
 window.renderAdminTable = renderAdminTable;
 window.handleAdminSearch = handleAdminSearch;
