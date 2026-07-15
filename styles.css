@@ -2197,6 +2197,17 @@ body.lightbox-open {
     letter-spacing: 1px;
 }
 
+.scan-pay-upi-id {
+    margin-top: 10px;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+}
+
+.scan-pay-upi-id strong {
+    color: var(--text-primary);
+}
+
 /* Form controls styling */
 .form-group select {
     background: rgba(255, 255, 255, 0.04);
