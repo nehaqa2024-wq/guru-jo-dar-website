@@ -99,7 +99,7 @@ const playlist = [
         title: "Hath Guraan Da Guruji - Bade Mandir",
         artist: "Siddharth Mohan",
         duration: "4:28",
-        src: bhajanSrc("hath-guraan-da-guruji.mp3")
+        src: bhajanSrc("hath-guraan-da-guruji--siddharth-mohan.mp3")
     },
     {
         title: "Tereya Charana Ch Meri Ardaas Daata Guruji",
