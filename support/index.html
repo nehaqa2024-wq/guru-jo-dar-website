@@ -133,6 +133,27 @@
                                 <div class="success-icon" style="color: var(--primary-gold);"><i class="fa-solid fa-circle-check"></i></div>
                                 <h3 data-en="Thank You for Your Seva 🙏" data-hi="आपकी सेवा के लिए धन्यवाद 🙏" data-sd="तव्हां जी सेवा लाय मेहरबानी 🙏">Thank You for Your Seva 🙏</h3>
                                 <p data-en="Your contribution has been received successfully. May Guru Ji bless you and your family with happiness, peace, and prosperity." data-hi="आपका योगदान सफलतापूर्वक प्राप्त हो गया है। गुरु जी आपको और आपके परिवार को सुख, शांति और समृद्धि प्रदान करें।" data-sd="तव्हां जो दान स्वीकार थी वियो आहे। गुरु साहिब तव्हां खे ऐं तव्हां जे परिवार खे सुख, शांति ऐं तरक़्क़ी प्रदान कंदो।">Your contribution has been received successfully. May Guru Ji bless you and your family with happiness, peace, and prosperity.</p>
+                                
+                                <!-- Donation Receipt Summary Panel -->
+                                <div id="success-receipt-summary" style="margin: 25px 0; border: 1px dashed var(--primary-gold); border-radius: var(--border-radius-sm); padding: 20px; background: rgba(255,255,255,0.02); text-align: left; box-shadow: inset 0 0 10px rgba(0,0,0,0.2);">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem;">
+                                        <span style="color: var(--text-muted);" data-en="Donation ID" data-hi="दान आईडी" data-sd="दान आईडी">Donation ID</span>
+                                        <span id="s-receipt-id" style="font-weight: 600; font-family: monospace; color: var(--primary-gold);">GJD-DON-XXXXXX</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem;">
+                                        <span style="color: var(--text-muted);" data-en="Donor Name" data-hi="दाता का नाम" data-sd="दाता जो नालो">Donor Name</span>
+                                        <span id="s-receipt-name" style="font-weight: 600; color: var(--text-main);">Donor Name</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem;">
+                                        <span style="color: var(--text-muted);" data-en="Purpose" data-hi="उद्देश्य" data-sd="हेतु">Purpose</span>
+                                        <span id="s-receipt-purpose" style="font-weight: 600; color: var(--text-main);">Purpose</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; font-size: 0.95rem; border-top: 1px dashed var(--border-color); padding-top: 10px; margin-top: 10px;">
+                                        <span style="color: var(--text-muted); font-weight: 600;" data-en="Amount" data-hi="राशि" data-sd="रक़म">Amount</span>
+                                        <span id="s-receipt-amount" style="font-weight: bold; color: var(--primary-gold); font-size: 1.15rem;">₹0.00</span>
+                                    </div>
+                                </div>
+
                                 <div style="display: flex; flex-direction: column; gap: 10px; width: 100%; margin-top: 15px;">
                                     <button class="btn btn-primary btn-sm" onclick="downloadLastDonationReceipt()" style="background: var(--primary-gold); color: #000; font-weight: 700; border-color: var(--primary-gold);" data-en="Download Receipt 📄" data-hi="रसीद डाउनलोड करें 📄" data-sd="रसीद डाउनलोड कर्यो 📄">Download Receipt 📄</button>
                                     <button class="btn btn-secondary btn-sm" onclick="location.href='../index.html'" data-en="Back to Home" data-hi="मुख्य पृष्ठ पर जाएं" data-sd="मुख्य पृष्ठ ते वञो">Back to Home</button>

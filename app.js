@@ -847,6 +847,16 @@ function handleDonationSubmit(event) {
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalBtnContent;
 
+        // Populate Success Modal Receipt Preview
+        const sId = document.getElementById("s-receipt-id");
+        const sName = document.getElementById("s-receipt-name");
+        const sPurpose = document.getElementById("s-receipt-purpose");
+        const sAmount = document.getElementById("s-receipt-amount");
+        if (sId) sId.innerText = donationId;
+        if (sName) sName.innerText = name;
+        if (sPurpose) sPurpose.innerText = purpose;
+        if (sAmount) sAmount.innerText = `₹${amount}`;
+
         // Show Success Overlay Modal
         const successOverlay = document.getElementById("success-overlay");
         if (successOverlay) {
