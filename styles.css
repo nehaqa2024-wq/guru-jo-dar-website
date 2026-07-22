@@ -796,6 +796,23 @@ a {
     margin-bottom: 0;
 }
 
+/* Centres list inside Legacy Tab */
+.centres-list {
+    margin: 20px 0 25px 25px;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.centres-list li {
+    margin-bottom: 12px;
+}
+
+.centres-list li::marker {
+    color: var(--primary-gold);
+    font-weight: 700;
+}
+
 /* ==========================================
    3. BHAJAN DARBAR (MUSIC PLAYER)
    ========================================== */

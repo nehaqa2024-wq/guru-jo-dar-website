@@ -166,7 +166,11 @@ function initApp() {
                         } catch (e) {
                             console.warn("Could not save theme to localStorage:", e);
                         }
-                        showToast("Switched to Light Theme");
+                        showToast(uiMessage(
+                            "Switched to Light Theme",
+                            "लाइट थीम चुनी गई।",
+                            "लाइट थीम चुणियो वियो।"
+                        ));
                     } else {
                         document.documentElement.removeAttribute('data-theme');
                         themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
@@ -176,7 +180,11 @@ function initApp() {
                         } catch (e) {
                             console.warn("Could not save theme to localStorage:", e);
                         }
-                        showToast("Switched to Dark Theme");
+                        showToast(uiMessage(
+                            "Switched to Dark Theme",
+                            "डार्क थीम चुनी गई।",
+                            "डार्क थीम चुणियो वियो।"
+                        ));
                     }
                 });
             }
@@ -192,7 +200,11 @@ function initApp() {
             ambientAudio.pause();
             pulseIndicator.classList.remove("active");
             isAmbientPlaying = false;
-            showToast("Ambient spiritual background chant paused.");
+            showToast(uiMessage(
+                "Ambient spiritual background chant paused.",
+                "पार्श्व भजन रोक दिया गया।",
+                "पार्श्व भजन रोकियो वियो।"
+            ));
         } else {
             // Pause the main player if playing
             if (isPlaying) pauseBhajan();
@@ -200,9 +212,17 @@ function initApp() {
             ambientAudio.play().then(() => {
                 pulseIndicator.classList.add("active");
                 isAmbientPlaying = true;
-                showToast("Ambient spiritual background chant playing.");
+                showToast(uiMessage(
+                    "Ambient spiritual background chant playing.",
+                    "पार्श्व भजन चल रहा है।",
+                    "पार्श्व भजन वजे रह्यो आहे।"
+                ));
             }).catch(e => {
-                showToast("Please interact with the page to allow audio playback.");
+                showToast(uiMessage(
+                    "Please interact with the page to allow audio playback.",
+                    "ऑडियो चलाने के लिए कृपया पेज पर क्लिक करें।",
+                    "ऑडियो चलण लाय कृपा करि पहिलें पेज ते क्लिक कर्यो।"
+                ));
             });
         }
             });
@@ -304,6 +324,7 @@ function changeLanguage(langCode, event, showNotification = true) {
     } catch (e) {
         console.warn("Could not save language to localStorage:", e);
     }
+    currentLanguage = langCode;
     const items = document.querySelectorAll("[data-en]");
     
     items.forEach(el => {
@@ -335,11 +356,32 @@ function changeLanguage(langCode, event, showNotification = true) {
     }
     
     if (showNotification) {
-        let welcomeMsg = "Language changed successfully.";
-        if (langCode === 'hi') welcomeMsg = "भाषा सफलतापूर्वक बदल दी गई है।";
-        if (langCode === 'sd') welcomeMsg = "ٻولي ڪاميابيءَ سان تبديل ٿي وئي آهي.";
-        showToast(welcomeMsg);
+        showToast(uiMessage(
+            "Language changed successfully.",
+            "भाषा सफलतापूर्वक बदल दी गई है।",
+            "भाषा कामयाबी सां तबदील थी वियो आहे।"
+        ));
     }
+}
+
+function uiMessage(en, hi, sd) {
+    if (currentLanguage === "hi") return hi;
+    if (currentLanguage === "sd") return sd;
+    return en;
+}
+
+function copyLabelText(label) {
+    const labels = {
+        "Account Number": { hi: "खाता संख्या", sd: "खाते जो नंबर" },
+        "IFSC Code": { hi: "आईएफएससी कोड", sd: "IFSC कोड" },
+        "Email": { hi: "ईमेल", sd: "ईमेल" },
+        "Contact Number": { hi: "संपर्क नंबर", sd: "संपर्क नंबर" }
+    };
+    const entry = labels[label];
+    if (!entry) return label;
+    if (currentLanguage === "hi") return entry.hi;
+    if (currentLanguage === "sd") return entry.sd;
+    return label;
 }
 
 function toggleMobileMenu() {
@@ -466,9 +508,17 @@ function playBhajan() {
         isPlaying = true;
         document.getElementById("play-btn").innerHTML = '<i class="fa-solid fa-pause"></i>';
         document.getElementById("music-disk").classList.add("playing");
-        showToast(`Now playing: ${playlist[currentTrackIndex].title}`);
+        showToast(uiMessage(
+            `Now playing: ${playlist[currentTrackIndex].title}`,
+            `अब चल रहा है: ${playlist[currentTrackIndex].title}`,
+            `वञे रह्यो आहे: ${playlist[currentTrackIndex].title}`
+        ));
     }).catch(e => {
-        showToast("Audio playback blocked. Click play again.");
+        showToast(uiMessage(
+            "Audio playback blocked. Click play again.",
+            "ऑडियो चलाने में समस्या। फिर से प्ले करें।",
+            "ऑडियो चालू न थो। फरी क्लिक कर्यो।"
+        ));
     });
 }
 
@@ -511,10 +561,10 @@ function toggleMute() {
     
     if (audioPlayer.muted) {
         muteBtn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
-        showToast("Audio Muted");
+        showToast(uiMessage("Audio Muted", "ऑडियो म्यूट", "आवाज़ बंद"));
     } else {
         muteBtn.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
-        showToast("Audio Unmuted");
+        showToast(uiMessage("Audio Unmuted", "ऑडियो अनम्यूट", "आवाज़ चालू"));
     }
 }
 
@@ -704,7 +754,11 @@ function generatePledgeReceipt(event) {
     document.getElementById("seva-pledge-form").classList.add("hidden");
     document.getElementById("receipt-result").classList.remove("hidden");
     
-    showToast(`Thank you ${name}! Seva Pledge registered successfully.`);
+    showToast(uiMessage(
+        `Thank you ${name}! Seva Pledge registered successfully.`,
+        `धन्यवाद ${name}! सेवा संकल्प सफलतापूर्वक दर्ज हो गया।`,
+        `मेहरबानी ${name}! सेवा संकल्प कामयाबी सां दर्ज थी वियो।`
+    ));
 }
 
 /* ==========================================
@@ -733,7 +787,11 @@ function clearPresetAmounts() {
 function copyToClipboard(text, label) {
     if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(text).then(() => {
-            showToast(`${label} Copied Successfully`);
+            showToast(uiMessage(
+                `${copyLabelText(label)} Copied Successfully`,
+                `${copyLabelText(label)} सफलतापूर्वक कॉपी हो गया`,
+                `${copyLabelText(label)} कामयाबी सां कॉपी थी वियो`
+            ));
         }).catch(err => {
             console.error("Failed to copy text: ", err);
             fallbackCopyText(text, label);
