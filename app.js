@@ -1031,39 +1031,39 @@ function downloadLastDonationReceipt() {
             
             <div class="row">
                 <span class="label">Donation ID</span>
-                <span class="value" style="font-family: monospace; font-weight: bold;">\${item.id}</span>
+                <span class="value" style="font-family: monospace; font-weight: bold;">${item.id || 'N/A'}</span>
             </div>
             <div class="row">
                 <span class="label">Transaction ID</span>
-                <span class="value" style="font-family: monospace;">\${item.txnId}</span>
+                <span class="value" style="font-family: monospace;">${item.txnId || 'N/A'}</span>
             </div>
             <div class="row">
                 <span class="label">Donor Name</span>
-                <span class="value">\${item.name}</span>
+                <span class="value">${item.name || 'N/A'}</span>
             </div>
             <div class="row">
                 <span class="label">Mobile Number</span>
-                <span class="value">\${item.phone}</span>
+                <span class="value">${item.phone || 'N/A'}</span>
             </div>
             <div class="row">
                 <span class="label">Email Address</span>
-                <span class="value">\${item.email}</span>
+                <span class="value">${item.email || 'N/A'}</span>
             </div>
             <div class="row">
                 <span class="label">Donation Amount</span>
-                <span class="value amount">₹\${item.amount}</span>
+                <span class="value amount">₹${item.amount || 'N/A'}</span>
             </div>
             <div class="row">
                 <span class="label">Purpose</span>
-                <span class="value">\${item.purpose}</span>
+                <span class="value">${item.purpose || 'N/A'}</span>
             </div>
             <div class="row">
                 <span class="label">Payment Status</span>
-                <span class="value" style="color: #14b8a6; font-weight: bold;">\${item.status}</span>
+                <span class="value" style="color: #14b8a6; font-weight: bold;">${item.status || 'N/A'}</span>
             </div>
             <div class="row">
                 <span class="label">Date & Time</span>
-                <span class="value">\${item.dateTime}</span>
+                <span class="value">${item.dateTime || 'N/A'}</span>
             </div>
             
             <div class="footer">
