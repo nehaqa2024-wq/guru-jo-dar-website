@@ -1422,6 +1422,10 @@ body.lightbox-open {
 }
 
 .success-icon {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font-size: 4rem;
     color: var(--primary-gold);
     margin-bottom: 20px;
